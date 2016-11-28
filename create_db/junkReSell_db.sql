@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 28, 2016 at 11:49 PM
+-- Generation Time: Nov 29, 2016 at 12:12 AM
 -- Server version: 10.1.8-MariaDB
 -- PHP Version: 5.6.14
 
@@ -23,27 +23,11 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `list`
---
-
-CREATE TABLE `list` (
-  `id` int(11) NOT NULL,
-  `details` text NOT NULL,
-  `date_posted` varchar(30) NOT NULL,
-  `time_posted` time NOT NULL,
-  `date_edited` varchar(30) NOT NULL,
-  `time_edited` time NOT NULL,
-  `public` varchar(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+  `userID` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `fullname` text NOT NULL,
@@ -54,7 +38,7 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `fullname`, `address`) VALUES
+INSERT INTO `users` (`userID`, `email`, `password`, `fullname`, `address`) VALUES
 (1, 'colonmanuel@gmail.com', 'mamama', '', ''),
 (2, 'mama@hotmail.com', '123', '', ''),
 (3, 'hello@aol.com', 'green123', '', '');
@@ -64,31 +48,20 @@ INSERT INTO `users` (`id`, `email`, `password`, `fullname`, `address`) VALUES
 --
 
 --
--- Indexes for table `list`
---
-ALTER TABLE `list`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`userID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `list`
---
-ALTER TABLE `list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
