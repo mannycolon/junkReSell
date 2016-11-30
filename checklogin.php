@@ -30,7 +30,7 @@
         //set the email as username in a session, this will serve as a global variable
         $_SESSION['user'] = $email;
         //redirects the user to the authenticated home page
-        header("location: home.php");
+        header("location: account.php");
       }
     }else{
       print '<script>alert("Incorrect Password!");</script>';

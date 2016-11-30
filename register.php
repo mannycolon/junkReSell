@@ -3,13 +3,20 @@
         <title>Registration Page</title>
     </head>
     <body>
-        <h2>Registration Page</h2>
+        <h1>Registration Page</h1>
         <a href="index.php">Click here to go back</a><br/><br/>
         <form action="register.php" method="POST">
-           Full Name: <input type="text" name="fullname" required="required" /> <br/>
-           Address: <input type="text" name="address" required="required" /> <br/>
-           Email: <input type="text" name="email" required="required"><br>
+          <h2>Account Information</h2>
+           E-mail: <input type="text" name="email" required="required"><br>
            password: <input type="password" name="password" required="required" /> <br/>
+           First Name: <input type="text" name="firstname" required="required" /> <br/>
+           Last Name: <input type="text" name="lastname" required="required" /> <br/>
+           <h2>Shipping Address</h2>
+           Address: <input type="text" name="address" required="required" /> <br/>
+           City: <input type="text" name="city" required="required" /> <br/>
+           State: <input type="text" name="state" required="required" /> <br/>
+           Zip Code: <input type="text" name="zipcode" required="required" /> <br/>
+           Phone: <input type="text" name="phone" required="required" /> <br/>
            <input type="submit" value="Register"/>
         </form>
     </body>
@@ -18,7 +25,17 @@
   if($_SERVER["REQUEST_METHOD"] == "POST"){
     $email = mysql_real_escape_string($_POST['email']);
     $password = mysql_real_escape_string($_POST['password']);
-    $fullname = mysql_real_escape_string($_POST['fullname']);
+    $firstname = mysql_real_escape_string($_POST['firstname']);
+    $lastname = mysql_real_escape_string($_POST['lastname']);
+
+    $address = mysql_real_escape_string($_POST['address']);
+    $city = mysql_real_escape_string($_POST['city']);
+    $state = mysql_real_escape_string($_POST['state']);
+    $zipcode = mysql_real_escape_string($_POST['zipcode']);
+    $phone = mysql_real_escape_string($_POST['phone']);
+
+
+
 
     echo "email account entered is " . $email . "<br/>";
     echo "password  entered is " . $password;
@@ -47,7 +64,7 @@
     }
     if($bool){
       //inserts the values to table users
-      mysql_query("INSERT INTO users (email, password, fullname) VALUES ('$email', '$password', '$fullname')");
+      mysql_query("INSERT INTO users (email, password, firstname, lastname) VALUES ('$email', '$password', '$firstname', '$lastname')");
       //prompt to let user know registration was succesful
       print '<script>alert("Successully registered!");</script>';
       //redirects to register.php
