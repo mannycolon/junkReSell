@@ -15,7 +15,7 @@
   $user = $_SESSION['user'];
   ?>
   <body>
-    <h2>Home</h2>
+    <h2>Acount</h2>
     <p> Hello <?php print "$user"?>!</p>
     <a href="logout.php">logout</a>
   </body>
