@@ -1,6 +1,6 @@
 <html>
     <head>
-    <title>My first PHP Website</title>
+    <title>junkReSell</title>
     </head>
     <body>
         <?php
