@@ -108,3 +108,13 @@ INSERT INTO `product` (`productID`, `categoryID`, `productName`, `productPrice`,
  720p Samsung HDTV delivers a wide variety of colors and clarity, allowing you to relax and enjoy your 
  favorite movies and shows. Connect your USB device directly for access to your photos, videos and music.', '2016-09-23');
  
+ALTER TABLE product ADD abbrvName VARCHAR(60) AFTER productName;
+UPDATE product SET abbrvName='samsungTV'WHERE productID=1;
+
+INSERT INTO `product` (`productID`, `categoryID`, `productName`, `abbrvName`, `productPrice`, `description`, `dateAdded`) VALUES
+(2, 1, 'Apple iPad Air 16GB WiFi', 'iPad', '379.00', 'For tech connoisseurs, the lighter and thinner the design, the more desirable 
+  that piece of hardware is. Designed for true techies, the Apple iPad Air is 20 percent thinner than the standard iPad, 
+  and weighs just one pound, so it feels unbelievably light in your hand. It comes with a 9.7" Retina display, the A7 
+  chip with 64-bit architecture, ultrafast wireless, powerful apps, and up to 10 hours of battery life. And over 475,000 
+  apps in the App Store are just a tap away on the Apple iPad Air. ', '2016-10-06');
+ 
