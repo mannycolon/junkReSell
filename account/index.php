@@ -1,15 +1,14 @@
-  <?php require_once('../util/main.php'); ?>
-  <?php require_once('../util/userSession.php'); ?>
-  <?php include '../view/header.php'; ?>
-    <?php
+<?php require_once('../util/main.php'); ?>
+<?php require_once('../util/userSession.php'); ?>
+<?php include '../view/header.php'; ?>
+<?php
     //checks if user is logged in
-    if($_SESSION['user']){
-    }else{
-      //redirect if user is not logged in
-      header("location: $app_path");
-    }
-    //assigns user value
-    ?>
+  if($_SESSION['user']){
+  }else{
+    //redirect if user is not logged in
+    header("location: $app_path");
+  }
+?>
     <main class="nofloat">
       <h2>Acount</h2>
       <p> Hello <?php print "$user"?>!</p>
