@@ -8,7 +8,7 @@
   //checks if user is logged in
   if($_SESSION['user']){
   }else{
-    //redirect if usr is not logged in
+    //redirect if user is not logged in
     header("location: index.php");
   }
   //assigns user value
