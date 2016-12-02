@@ -65,3 +65,46 @@ ALTER TABLE `users`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+--
+-- Table structure for table `category`
+-- 
+CREATE TABLE `category` (
+  `categoryID` int(11) NOT NULL AUTO_INCREMENT,
+  `categoryName` varchar(255) NOT NULL,
+  PRIMARY KEY (categoryID)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1; 
+ 
+--
+-- Dumping data for table `category`
+--
+INSERT INTO `category`(`categoryID`, `categoryName`) VALUES 
+(1,'Electronics')
+(2,'Sporting Goods'),
+(3,'Home and Garden'),
+(4,'Clothing'),
+(5,'Other');
+
+--
+-- Table structure for table `product`
+--
+
+CREATE TABLE `product` (
+  `productID` int(11) NOT NULL AUTO_INCREMENT,
+  `categoryID` int(11) NOT NULL,
+  `productName` varchar(100) NOT NULL,
+  `productPrice` decimal(10,2) NOT NULL,
+  `description` text NOT NULL,
+  `dateAdded` date NOT NULL,
+  PRIMARY KEY (productID)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`productID`, `categoryID`, `productName`, `productPrice`, `description`, `dateAdded`) VALUES
+(1, 1, 'Samsung 720p LED TV (2014 Model)', '650.00', 'Ideal for placement in a bedroom or dorm room, this 
+ 720p Samsung HDTV delivers a wide variety of colors and clarity, allowing you to relax and enjoy your 
+ favorite movies and shows. Connect your USB device directly for access to your photos, videos and music.', '2016-09-23');
+ 
