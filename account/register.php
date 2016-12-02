@@ -4,7 +4,6 @@
     </head>
     <body>
         <h1>Registration Page</h1>
-        <a href="index.php">Click here to go back</a><br/><br/>
         <form action="register.php" method="POST">
           <h2>Account Information</h2>
            E-mail: <input type="text" name="email" required="required"><br>
