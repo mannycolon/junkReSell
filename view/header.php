@@ -28,14 +28,14 @@
                 //checks if user is logged in
                 if (isset($_SESSION['user'])) :
               ?>
-                  <li><a href="<?php echo $app_path ?>account/index.php"><?php echo $user ?></a></li>';
+                  <li><a href="<?php echo $app_path ?>account/index.php"><?php echo $user ?></a></li>
                   <li><a href="<?php echo $app_path ?>account/logout.php">Logout</a></li>
               <?php else: ?>
-                  <li><a href='./account/login.php'>Login</a> </li>";
+                  <li><a href="<?php echo $app_path ?>./account/login.php">Login</a></li>
               <?php endif; ?>
-              <li><a href="<?php echo $app_path ?>account/register.php">Register</a> </li>
-              <li><a href="cart.php">My Cart</a> </li>
-              <li><a href="checkout.php">Checkout</a> </li>
+                  <li><a href="<?php echo $app_path ?>account/register.php">Register</a> </li>
+                  <li><a href="cart.php">My Cart</a> </li>
+                  <li><a href="checkout.php">Checkout</a> </li>
             </ul>
          </div>
         </nav>

@@ -1,6 +1,5 @@
 <?php require_once('../util/main.php'); ?>
 <?php require_once('../util/userSession.php'); ?>
-<?php include '../view/header.php'; ?>
 <?php
     //checks if user is logged in
   if($_SESSION['user']){
@@ -9,6 +8,7 @@
     header("location: $app_path");
   }
 ?>
+<?php include '../view/header.php'; ?>
     <main class="nofloat">
       <h2>Acount</h2>
       <p> Hello <?php print "$user"?>!</p>

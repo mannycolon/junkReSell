@@ -1,7 +1,6 @@
 <?php require_once('../util/main.php'); ?>
 <?php include '../view/header.php'; ?>
-
-    <main class="login">
+    <main>
         <form class="form-signin" action="checklogin.php" method="POST">
           <h2 class="form-signin-heading">Login Page</h2>
            <input type="email"  placeholder="Email address" class="form-control" name="email" required="required" autofocus><br>
