@@ -4,24 +4,12 @@
   <main class="nofloat">
     <br>
 	<table>
-	    <?php
-
-			  $dsn = 'mysql:host=localhost;dbname=junkresell_db';
-		    $username = 'root';
-		    $password = '';
-
-		    try {
-		        $db = new PDO($dsn, $username, $password);
-		        echo '<p>Connected to database</p>';
-		    } catch (PDOException $e) {
-		        $error_message = $e->getMessage();
-		        include('database_error.php');
-		        exit();
-		    }
+	    <?php include 'categoryfunctions.php';
 
 			$category_id = filter_input(INPUT_GET, 'category_id', FILTER_VALIDATE_INT);
-			if ($category_id == NULL || $category_id == FALSE) {
-			    $category_id = 1;
+			if ($category_id == NULL || $category_id == FALSE) 
+			{
+			    $category_id = rand(1, 5);
 			}
 			// Get name for selected category
 			$queryCategory = 'SELECT * FROM category
