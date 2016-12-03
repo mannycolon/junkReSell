@@ -1,23 +1,6 @@
-<?php
+<?php include 'view/header.php';
 
-    //set database name, username, password
-    $dsn = 'mysql:host=localhost;dbname=junkresell_db';
-    $username = 'root';
-    $password = '';
-
-    //connect to database
-    try 
-    {
-        $db = new PDO($dsn, $username, $password);
-        echo '<p>Connected to database</p>';
-    } 
-    //if no connection to database
-    catch (PDOException $e) 
-    {
-        $error_message = $e->getMessage();
-        include('database_error.php');
-        exit();
-    }
+    include 'categoryfunctions.php';
 
     //get id of product from index.php
     $pID = $_GET['id'];
