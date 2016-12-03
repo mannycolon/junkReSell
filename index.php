@@ -4,10 +4,10 @@
   <main class="nofloat">
     <br>
 	<table>
-	    <?php include 'categoryfunctions.php';
+	    <?php include 'category/categoryfunctions.php';
 
 			$category_id = filter_input(INPUT_GET, 'category_id', FILTER_VALIDATE_INT);
-			if ($category_id == NULL || $category_id == FALSE) 
+			if ($category_id == NULL || $category_id == FALSE)
 			{
 			    $category_id = rand(1, 5);
 			}
@@ -63,20 +63,19 @@
                 <th>Description</th>
                 <th class="right">Price</th>
             </tr>
-
+<?php echo $app_path ?>libs/bootstrap/css/bootstrap.min.css
             <tr>
-                <td><a href="productpage.php?id=<?php echo $product['abbrvName']; ?>" >
-                <img src="images/<?php echo $product['abbrvName'].'.png'; ?>" 
-                	alt="images/<?php echo $product['abbrvName'].'.png'; ?>" width = "50%";/></a> </td>
+                <td><a href="<?php echo $app_path ?>category/productpage.php?id=<?php echo $product['abbrvName']; ?>" >
+                <img src="<?php echo $app_path ?>images/<?php echo $product['abbrvName'].'.png'; ?>"
+                	alt="<?php echo $app_path ?>images/<?php echo $product['abbrvName'].'.png'; ?>" width = "50%";/></a> </td>
                 <td><?php echo $product['description']; ?></td>
                 <td class="right"><?php echo $product['productPrice']; ?></td>
             </tr>
-            <?php endforeach; ?>            
+            <?php endforeach; ?>
         </table>
     </section>
 
-</main>    
+</main>
 <footer></footer>
 </body>
 </html>
-	    
