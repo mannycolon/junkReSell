@@ -25,8 +25,12 @@ $activePage = dirname($_SERVER['PHP_SELF']) . "/" . basename($_SERVER['PHP_SELF'
               <li class="<?= ($activePage == '/junkReSell/index') ? 'active':'';?>">
                 <a href="<?php echo $app_path ?>index.php">Home</a>
               </li>
-              <li><a href="categories.php">Categories</a></li>
-              <li><a href="admin.php">Admin</a></li>
+              <li class="<?= ($activePage == '/junkReSell//category/categories') ? 'active':'';?>">
+                <a href="<?php echo $app_path ?>/category/categories.php">Categories</a>
+              </li>
+              <li class="<?= ($activePage == '/junkReSell/admin/admin') ? 'active':'';?>">
+                <a href="<?php echo $app_path ?>/admin/admin.php">Admin</a>
+              </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <?php

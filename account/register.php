@@ -5,7 +5,7 @@
       <form action="register.php" method="POST" style="text-align: center; padding-left: 100px; padding-right: 100px">
       <div class="row">
         <h1 style="text-align: center">Registration Page</h1>
-        <div class="col-sm-6 col-md-6">
+        <div class="col-sm-4 col-md-4">
           <h2>Account Information</h2>
           <input class="form-control" type="text" name="email"
                  required="required" placeholder="Email address"><br>
@@ -16,7 +16,7 @@
           <input class="form-control" type="text" name="lastname"
                  required="required" placeholder="Last Name"/> <br/>
         </div>
-        <div class="col-sm-6 col-md-6">
+        <div class="col-sm-4 col-md-4">
         <h2>Shipping Address</h2>
           <input class="form-control" type="text" name="address"
                  required="required" placeholder="Address"/> <br/>
@@ -27,6 +27,19 @@
           <input class="form-control" type="text" name="zipcode"
                  required="required" placeholder="Zip Code"/> <br/>
           <input class="form-control" type="text" name="phone"
+                 required="required" placeholder="Phone Number"/> <br/>
+        </div>
+        <div class="col-sm-4 col-md-4">
+        <h2>Billing Address</h2>
+          <input class="form-control" type="text" name="billingaddress"
+                 required="required" placeholder="Address"/> <br/>
+          <input class="form-control" type="text" name="billingcity"
+                 required="required" placeholder="City"/> <br/>
+          <input class="form-control" type="text" name="billingstate"
+                 required="required" placeholder="State"/> <br/>
+          <input class="form-control" type="text" name="billingzipcode"
+                 required="required" placeholder="Zip Code"/> <br/>
+          <input class="form-control" type="text" name="billingphone"
                  required="required" placeholder="Phone Number"/> <br/>
         </div>
       </div>

@@ -1,4 +1,5 @@
-<?php include 'view/header.php';
+<?php require_once('../util/main.php'); ?>
+<?php include '../view/header.php';
 
     include 'categoryfunctions.php';
 
@@ -58,15 +59,15 @@
 
             <tr>
                 <td><a href="productpage.php?id=<?php echo $product['abbrvName']; ?>" >
-                <img src="images/<?php echo $product['abbrvName'].'.png'; ?>" 
-                    alt="images/<?php echo $product['abbrvName'].'.png'; ?>" width = "50%";/></a> </td>
+                <img src="<?php echo $app_path ?>images/<?php echo $product['abbrvName'].'.png'; ?>"
+                    alt="<?php echo $app_path ?>images/<?php echo $product['abbrvName'].'.png'; ?>" width = "50%";/></a> </td>
                 <td><?php echo $product['description']; ?></td>
                 <td class="right"><?php echo $product['productPrice']; ?></td>
             </tr>
-            <?php endforeach; ?>            
+            <?php endforeach; ?>
         </table>
     </section>
-</main>    
+</main>
 <footer></footer>
 </body>
 </html>

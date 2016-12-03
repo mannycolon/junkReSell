@@ -1,8 +1,9 @@
-<?php include 'view/header.php'; ?>
+<?php require_once('../util/main.php'); ?>
+<?php include '../view/header.php'; ?>
   <main class="nofloat">
     <br>
         <?php include 'categoryfunctions.php'; ?>
-        
+
 <!DOCTYPE html>
 <html>
 <!-- the head section -->
@@ -19,11 +20,10 @@
         <h2>Categories</h2>
         <nav>
             <?php echo all_categories() ?>
-        </nav>           
+        </nav>
     </aside>
 
-</main>    
+</main>
 <footer></footer>
 </body>
 </html>
-        
