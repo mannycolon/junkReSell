@@ -1,43 +1,63 @@
 <?php
-    // Parse data
-    $category_id = $product['categoryID'];
-    $product_name = $product['productName'];
-    $description = $product['description'];
-    $product_price = $product['productPrice'];
-    $image_name = $product['abbrvName']; //will be used to name the pics
 
-    // Add HMTL tags to the description
-    $description_with_tags = add_tags($description);
+    //set database name, username, password
+    $dsn = 'mysql:host=localhost;dbname=junkresell_db';
+    $username = 'root';
+    $password = '';
 
-    // Formats price of product
-    $unit_price = number_format($product_price, 2);
+    //connect to database
+    try 
+    {
+        $db = new PDO($dsn, $username, $password);
+        echo '<p>Connected to database</p>';
+    } 
+    //if no connection to database
+    catch (PDOException $e) 
+    {
+        $error_message = $e->getMessage();
+        include('database_error.php');
+        exit();
+    }
 
-    // Get image URL and alternate text
-    $image_filename = $image_name . '.png';
-    $image_path = $app_path . 'images/' . $image_filename;
-    $image_alt = 'Image filename: ' . $image_filename; //sets up alt if pic does not show up
+    //get id of product from index.php
+    $pID = $_GET['id'];
+
+    //get table for selected product
+    $queryProduct = "SELECT *
+                     FROM product
+                     WHERE abbrvName = '$pID'";
+    $result = $db->prepare($queryProduct);
+    $result->execute();
+    $products = $result->fetchAll();
+    $result->closeCursor();
+
 ?>
-<!--Print product name-->
-<h1><?php echo htmlspecialchars($product_name); ?></h1> 
-<!--Add picture-->
-<div id="left_column">
-    <p><img src="<?php echo $image_path; ?>"
-            alt="<?php echo $image_alt; ?>" /></p>
-</div>
+<html>
+<!--Display details of the product with the specific id-->
+<?php foreach ($products as $product) : ?>
+    <!--Print product name-->
+    <h1><?php echo htmlspecialchars($product['productName']); ?></h1> 
+    <!--Add picture-->
+    <div id="left_column">
+        <p><img src="images/<?php echo $product['abbrvName'].'.png'; ?>"
+            alt="images/<?php echo $product['abbrvName'].'.png'; ?>" /></p>
+    </div>
 
-<!--Add product details-->
-<div id="right_column">
-    <p><b>Price:</b>
-        <?php echo '$' . $product_price; ?></p>
-    <form action="<?php echo $app_path . 'cart' ?>" method="get" 
-          id="add_to_cart_form">
-        <input type="hidden" name="action" value="add" />
-        <input type="hidden" name="product_id"
-               value="<?php echo $product_id; ?>" />
-        <b>Quantity:</b>&nbsp;
-        <input type="text" name="quantity" value="1" size="2" />
-        <input type="submit" value="Add to Cart" />
-    </form>
-    <h2>Description</h2>
-    <?php echo $description_with_tags; ?>
-</div>
+    <!--Add product details-->
+    <div id="right_column">
+        <p><b>Price:</b>
+            <?php echo '$' . $product['productPrice']; ?></p>
+        <form action="<?php echo $app_path . 'cart' ?>" method="get" 
+              id="add_to_cart_form">
+            <input type="hidden" name="action" value="add" />
+            <input type="hidden" name="product_id"
+                   value="<?php echo $product_id; ?>" />
+            <b>Quantity:</b>&nbsp;
+            <input type="text" name="quantity" value="1" size="2" />
+            <input type="submit" value="Add to Cart" />
+        </form>
+        <h2>Description</h2>
+        <?php echo $product['description'] ?>
+        <?php endforeach; ?>
+    </div>
+</html>
