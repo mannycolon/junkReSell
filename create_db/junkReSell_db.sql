@@ -237,3 +237,23 @@ INSERT INTO `product` (`productID`, `categoryID`, `productName`, `abbrvName`, `p
   police force, jumps at the chance to crack her first case even if it means partnering with scam-artist fox Nick Wilde to
   solve the mystery. Bring home this hilarious adventure full of action, heart and tons of bonus extras that take you deeper
   into the world of Zootopia. It s big fun for all shapes and species!', '2016-11-26');
+  
+ --
+-- Table structure for table `administrators`
+--
+
+CREATE TABLE `administrators` (
+  `adminID` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `fullName` varchar(255) NOT NULL,
+  PRIMARY KEY (adminID)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `administrators` 
+--
+
+INSERT INTO `administrators` (`adminID`, `email`, `password`, `fullName`) VALUES
+(1, 'admin@aol.com', 'testing1234', 'John Admin');
+
