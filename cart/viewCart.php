@@ -57,7 +57,7 @@ $cart = new Cart;
               <td colspan="2"></td>
               <?php if($cart->totalItems() > 0){ ?>
               <td class="text-center">
-                <strong>Total <?php echo '$'.$cart->total().' USD'; ?></strong>
+                <strong>Total <?php echo '$'.$cart->totalPrice().' USD'; ?></strong>
               </td>
               <td>
                 <a href="checkout.php" class="btn btn-success btn-block">
@@ -70,6 +70,8 @@ $cart = new Cart;
         </table>
       </div>
     </main>
+    <!-- adding jquery library to be used in the script below -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>
     function updateCartItem(obj,id){
         $.get("cartAction.php", {action:"updateCartItem", id:id, qty:obj.value},

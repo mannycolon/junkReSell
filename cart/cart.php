@@ -27,14 +27,13 @@ class Cart{
 
      /**
      * Get cart item: Returns a specific cart item details
-     * @param: string $row_ID
+     * @param: string $row_id
      * @return: array
      */
-     public function getItem($row_ID){
-       return(in_array($row_ID, array('totalItems', 'cartTotal'), TRUE) OR !
-              isset($this->cartContents[$row_ID]))
+     public function getItem($row_id){
+       return(in_array($row_id, array('totalItems', 'cartTotal'), TRUE) OR !isset($this->cartContents[$row_id]))
               ? FALSE
-              : $this->cartContents[$row_ID];
+              : $this->cartContents[$row_id];
      }
 
      /**
@@ -121,8 +120,7 @@ class Cart{
             if(isset($item['price'])){
               $item['price'] = (float) $item['price'];
             }
-            // product id & name shouldn't be changed
-            foreach(array_dif($keys, array('id', 'name')) as $key){
+            foreach($keys as $key){
               $this->cartContents[$item['rowid']][$key] = $item[$key];
             }
             // save cart data
