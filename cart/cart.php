@@ -1,4 +1,4 @@
-<?php session_start();
+<?php
 class Cart{
     protected $cartContents = array();
     public function __construct(){
