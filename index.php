@@ -51,6 +51,18 @@
 <body>
 <main>
     <h1>junkReSell Homepage</h1><br>
+    <?php
+
+    include './cart/Cart.php';
+    $cart = new Cart;
+    $cart_Contents = $cart->contents();
+    foreach ($cart_Contents as $key) {
+      echo $key;
+    }
+    echo $cart->totalItems();
+    ?>
+
+
     <section>
         <!-- display a table of products -->
         <h2><?php echo $category_name; ?></h2>
