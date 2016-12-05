@@ -14,7 +14,7 @@
       $itemData = array(
         'id' => $row['productID'],
         'name' => $row['productName'],
-        'price' => $row['productprice'],
+        'price' => $row['productPrice'],
         'qty' => 1
       );
 

@@ -51,7 +51,13 @@ $activePage = dirname($_SERVER['PHP_SELF']) . "/" . basename($_SERVER['PHP_SELF'
                   </li>
                   <li class="<?= ($activePage == '/junkReSell/cart/index') ? 'active':'';?>">
                     <a href="<?php echo $app_path ?>cart/viewCart.php">
-                      My Cart <span class="badge" id="comparison-count">0</span>
+                      <?php
+                      //include './cart/Cart.php';
+                      //$cart = new Cart;
+                      //$cartNumberOfItems = $cart->totalItems();
+                      $cartNumberOfItems = 0;
+                      ?>
+                      My Cart <span class="badge" id="comparison-count"><?php $cartNumberOfItems ?></span>
                     </a>
                   </li>
                   <li class="<?= ($activePage == '/junkReSell/checkout/index') ? 'active':'';?>">

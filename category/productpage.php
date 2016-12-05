@@ -38,6 +38,7 @@
                    value="<?php echo $product['productID']; ?>" />
             <b>Quantity:</b>&nbsp;
             <input type="text" name="quantity" value="1" size="2" />
+            <input type="hidden" name="price" value="<?php echo $product['productPrice']; ?>" />
             <input type="submit" value="Add to Cart" />
         </form>
         <h2>Description</h2>
