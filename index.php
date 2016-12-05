@@ -51,8 +51,6 @@
 <body>
 <main>
     <h1>junkReSell Homepage</h1><br>
-
-
     <section>
         <!-- display a table of products -->
         <h2><?php echo $category_name; ?></h2>
@@ -73,7 +71,6 @@
             <?php endforeach; ?>
         </table>
     </section>
-
 </main>
 <footer></footer>
 </body>

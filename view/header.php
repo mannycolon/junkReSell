@@ -50,7 +50,7 @@ $activePage = dirname($_SERVER['PHP_SELF']) . "/" . basename($_SERVER['PHP_SELF'
                     <a href="<?php echo $app_path ?>account/register.php">Register</a>
                   </li>
                   <li class="<?= ($activePage == '/junkReSell/cart/index') ? 'active':'';?>">
-                    <a href="<?php echo $app_path ?>cart/index.php">
+                    <a href="<?php echo $app_path ?>cart/viewCart.php">
                       My Cart <span class="badge" id="comparison-count">0</span>
                     </a>
                   </li>
