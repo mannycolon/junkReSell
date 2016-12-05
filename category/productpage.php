@@ -31,8 +31,8 @@
     <div id="right_column">
         <p><b>Price:</b>
             <?php echo '$' . $product['productPrice']; ?></p>
-        <form action="<?php echo $app_path . 'cart' ?>" method="get"
-              id="add_to_cart_form">
+        <form action="<?php echo $app_path ?>cart/cartAction.php?action=addToCart&id=<?php echo $product['productID']; ?>"
+              method="get" id="add_to_cart_form">
             <input type="hidden" name="action" value="add" />
             <input type="hidden" name="product_id"
                    value="<?php echo $product_id; ?>" />

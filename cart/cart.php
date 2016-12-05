@@ -144,7 +144,7 @@ class Cart{
               continue;
             }
             $this->cartContents['cartTotal'] += ($val['price'] * $val['qty']);
-            $this->cartContents['totalItems'] += ($val['qty'];
+            $this->cartContents['totalItems'] += $val['qty'];
             $this->cartContents[$key]['subtotal'] = ($this->cartContents[$key]['price'] * $this->cartContents[$key]['qty']);
           }
 
