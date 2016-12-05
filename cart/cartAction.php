@@ -1,10 +1,13 @@
-<?php
+<?php session_start();
   // initialize shopping cart class
   include 'Cart.php';
   $cart = new Cart;
 
   // include database configuration file
   include 'dbConfig.php';
+
+  ///loggin $_REQUEST
+
   if(isset($_REQUEST['action']) && !empty($_REQUEST['action'])){
     if($_REQUEST['action'] == 'addToCart' && !empty($_REQUEST['id'])){
       $productID = $_REQUEST['id'];
