@@ -28,7 +28,7 @@ $activePage = dirname($_SERVER['PHP_SELF']) . "/" . basename($_SERVER['PHP_SELF'
               <li class="<?= ($activePage == '/junkReSell//category/categories') ? 'active':'';?>">
                 <a href="<?php echo $app_path ?>/category/categories.php">Categories</a>
               </li>
-              <li class="<?= ($activePage == '/junkReSell/admin/admin') ? 'active':'';?>">
+              <li class="<?= ($activePage == '/junkReSell//admin/adminlogin') ? 'active':'';?>">
                 <a href="<?php echo $app_path ?>/admin/adminlogin.php">Admin</a>
               </li>
             </ul>
@@ -50,7 +50,9 @@ $activePage = dirname($_SERVER['PHP_SELF']) . "/" . basename($_SERVER['PHP_SELF'
                     <a href="<?php echo $app_path ?>account/register.php">Register</a>
                   </li>
                   <li class="<?= ($activePage == '/junkReSell/cart/index') ? 'active':'';?>">
-                    <a href="<?php echo $app_path ?>cart/index.php">My Cart</a>
+                    <a href="<?php echo $app_path ?>cart/viewCart.php">
+                      My Cart <span class="badge" id="comparison-count">0</span>
+                    </a>
                   </li>
                   <li class="<?= ($activePage == '/junkReSell/checkout/index') ? 'active':'';?>">
                     <a href="<?php echo $app_path ?>checkout/index.php">Checkout</a>

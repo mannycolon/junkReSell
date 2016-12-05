@@ -51,6 +51,16 @@
 <body>
 <main>
     <h1>junkReSell Homepage</h1><br>
+    <?php
+
+    include './cart/Cart.php';
+    $cart = new Cart;
+    $cart_Contents = $cart->contents();
+    foreach ($cart_Contents as $key) {
+      echo $key;
+    }
+    echo $cart->totalItems();
+    ?>
 
 
     <section>
@@ -63,7 +73,6 @@
                 <th>Description</th>
                 <th class="right">Price</th>
             </tr>
-<?php echo $app_path ?>libs/bootstrap/css/bootstrap.min.css
             <tr>
                 <td><a href="<?php echo $app_path ?>category/productpage.php?id=<?php echo $product['abbrvName']; ?>" >
                 <img src="<?php echo $app_path ?>images/<?php echo $product['abbrvName'].'.png'; ?>"
@@ -74,7 +83,6 @@
             <?php endforeach; ?>
         </table>
     </section>
-
 </main>
 <footer></footer>
 </body>
