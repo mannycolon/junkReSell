@@ -1,10 +1,13 @@
-<?php
+<?php session_start();
   // initialize shopping cart class
   include 'Cart.php';
   $cart = new Cart;
 
   // include database configuration file
   include 'dbConfig.php';
+
+  ///loggin $_REQUEST
+
   if(isset($_REQUEST['action']) && !empty($_REQUEST['action'])){
     if($_REQUEST['action'] == 'addToCart' && !empty($_REQUEST['id'])){
       $productID = $_REQUEST['id'];
@@ -19,7 +22,7 @@
       );
 
       $insertItem = $cart->insert($itemData);
-      $redirectLoc = $insertItem?'viewCart.php':'index.php';
+      $redirectLoc = $insertItem?'viewCart.php':'../index.php';
       header("Location: " . $redirectLoc);
     }elseif($_REQUEST['action'] == 'updateCartItem' && !empty($_REQUEST['id'])){
       $itemData = array(
@@ -54,7 +57,7 @@
         header("Location: checkout.php");
       }
     }else{
-      header("location: ../index.php");
+      header("location: ../account/index.php");
     }
   }else{
     header("location: ../index.php");
