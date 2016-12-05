@@ -63,7 +63,6 @@
                 <th>Description</th>
                 <th class="right">Price</th>
             </tr>
-<?php echo $app_path ?>libs/bootstrap/css/bootstrap.min.css
             <tr>
                 <td><a href="<?php echo $app_path ?>category/productpage.php?id=<?php echo $product['abbrvName']; ?>" >
                 <img src="<?php echo $app_path ?>images/<?php echo $product['abbrvName'].'.png'; ?>"
