@@ -46,7 +46,7 @@
         $insertOrderItems = $db->multi_query($sql);
         if($insertOrderItems){
           $cart->destroy();
-          header("Location: orderConfirmation.php?id=$orderID");
+          header("Location: orderSuccess.php?id=$orderID");
         }else{
           header("Location: checkout.php");
         }
