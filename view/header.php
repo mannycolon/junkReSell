@@ -22,6 +22,17 @@ $activePage = dirname($_SERVER['PHP_SELF']) . "/" . basename($_SERVER['PHP_SELF'
         <nav class="navbar navbar-inverse navbar-fixed-top">
           <div class="container">
             <ul class="nav navbar-nav">
+              <?php
+                //checks if user is logged in
+                if (isset($_SESSION['user'])) :
+              ?>
+              <li class="<?= ($activePage == '/junkReSell/index') ? 'active':'';?>">
+                <a href="<?php echo $app_path ?>index.php">Home</a>
+              </li>
+              <li class="<?= ($activePage == '/junkReSell//category/categories') ? 'active':'';?>">
+                <a href="<?php echo $app_path ?>/category/categories.php">Categories</a>
+              </li>
+              <?php else: ?>
               <li class="<?= ($activePage == '/junkReSell/index') ? 'active':'';?>">
                 <a href="<?php echo $app_path ?>index.php">Home</a>
               </li>
@@ -31,6 +42,7 @@ $activePage = dirname($_SERVER['PHP_SELF']) . "/" . basename($_SERVER['PHP_SELF'
               <li class="<?= ($activePage == '/junkReSell//admin/adminlogin') ? 'active':'';?>">
                 <a href="<?php echo $app_path ?>/admin/adminlogin.php">Admin</a>
               </li>
+              <?php endif; ?>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <?php
@@ -38,20 +50,26 @@ $activePage = dirname($_SERVER['PHP_SELF']) . "/" . basename($_SERVER['PHP_SELF'
                 if (isset($_SESSION['user'])) :
               ?>
                   <li class="<?= ($activePage == '/junkReSell/account/index') ? 'active':'';?>">
-                    <a href="<?php echo $app_path ?>account/index.php"><?php echo $user ?></a>
+                    <?php $user = $_SESSION['firstname'] ?>
+                    <a href="<?php echo $app_path ?>account/index.php">Hi, <?php echo $user ?></a>
                   </li>
                   <li><a href="<?php echo $app_path ?>account/logout.php">Logout</a></li>
               <?php else: ?>
                   <li class="<?= ($activePage == '/junkReSell/account/login') ? 'active':'';?>">
                     <a href="<?php echo $app_path ?>./account/login.php">Login</a>
                   </li>
-              <?php endif; ?>
                   <li class="<?= ($activePage == '/junkReSell/account/register') ? 'active':'';?>">
                     <a href="<?php echo $app_path ?>account/register.php">Register</a>
                   </li>
-                  <li class="<?= ($activePage == '/junkReSell/cart/index') ? 'active':'';?>">
+              <?php endif; ?>
+                  <li class="<?= ($activePage == '/junkReSell/cart/viewCart') ? 'active':'';?>">
                     <a href="<?php echo $app_path ?>cart/viewCart.php">
-                      My Cart <span class="badge" id="comparison-count">0</span>
+                      <?php
+                        include($_SERVER['DOCUMENT_ROOT'].'/junkReSell/cart/cart.php');
+                       $cart = new Cart;
+                       $cartNumOfItems = $cart->totalItems();
+                       ?>
+                      My Cart <span class="badge" id="comparison-count"><?php echo $cartNumOfItems ?></span>
                     </a>
                   </li>
                   <li class="<?= ($activePage == '/junkReSell/checkout/index') ? 'active':'';?>">

@@ -5,9 +5,6 @@
 
   // include database configuration file
   include 'dbConfig.php';
-
-  ///loggin $_REQUEST
-
   if(isset($_REQUEST['action']) && !empty($_REQUEST['action'])){
     if($_REQUEST['action'] == 'addToCart' && !empty($_REQUEST['id'])){
       $productID = $_REQUEST['id'];
@@ -17,7 +14,7 @@
       $itemData = array(
         'id' => $row['productID'],
         'name' => $row['productName'],
-        'price' => $row['productprice'],
+        'price' => $row['productPrice'],
         'qty' => 1
       );
 

@@ -13,6 +13,7 @@
   $exists = mysql_num_rows($query);
   $table_users = "";
   $table_password = "";
+  $table_firstname = "";
   //if there are not returning rows or no existing email
   if($exists > 0){
     //display all rows from query
@@ -23,12 +24,14 @@
       /*the first password row is passed on to $table_password,
       and so on until the query is finished*/
       $table_password = $row['password'];
+      $table_firstname = $row['fullName'];
     }
     //check if there are any matching fields
     if(($email == $table_users) && ($password == $table_password)){
       if($password == $table_password){
         //set the email as username in a session, this will serve as a global variable
         $_SESSION['user'] = $email;
+        $_SESSION['firstname'] = $table_firstname;
         //redirects the user to the authenticated home page
         header("location: index.php");
       }
