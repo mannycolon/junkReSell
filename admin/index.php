@@ -18,6 +18,9 @@
         <input type="file" name="fileToUpload" id="fileToUpload">
         <input type="submit" value="Upload Image" name="submit">
       </form>
+    <h2>Links</h2>
+    <p><a href="addproduct.php">Add Product</a></p>
     </main>
   </body>
 </html>
+
