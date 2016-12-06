@@ -28,7 +28,7 @@
 
     </div>
     <!--Add product details-->
-    <div class="col-sm-6 col-md-6">
+    <div class="col-sm-4 col-md-6">
       <!--Print product name-->
       <h1><?php echo htmlspecialchars($product['productName']); ?></h1><br /><br />
         <form action="<?php echo $app_path ?>cart/cartAction.php?action=addToCart&id=<?php echo $product['productID']; ?>"
