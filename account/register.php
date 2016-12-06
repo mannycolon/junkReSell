@@ -63,9 +63,6 @@
     $zipcode = mysql_real_escape_string($_POST['zipcode']);
     $phone = mysql_real_escape_string($_POST['phone']);
 
-    echo "email account entered is " . $email . "<br/>";
-    echo "password  entered is " . $password;
-
     $bool = true;
 
     //connecting to the Server
@@ -91,6 +88,12 @@
     if($bool){
       //inserts the values to table users
       mysql_query("INSERT INTO users (email, password, firstname, lastname) VALUES ('$email', '$password', '$firstname', '$lastname')");
+      $query = mysql_query("select * from users");
+      //displaying all row from query
+      while($row = mysql_fetch_array($query)){
+        $userID = $row['userID'];
+      }
+      mysql_query("INSERT INTO addresses (userID, address, city, state, zipCode, phone) VALUES ('$userID', '$address', '$city', '$state', '$zipcode', '$phone')");
       //prompt to let user know registration was succesful
       print '<script>alert("Successully registered!");</script>';
       //redirects to register.php
