@@ -5,8 +5,6 @@
 <?php
 // include database configuration file
 include 'dbConfig.php';
-
-
 // redirect to home if cart is empty
 if($cart->totalItems() <= 0){
     header("Location: ../index.php");
