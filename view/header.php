@@ -73,7 +73,7 @@ $activePage = dirname($_SERVER['PHP_SELF']) . "/" . basename($_SERVER['PHP_SELF'
                     </a>
                   </li>
                   <li class="<?= ($activePage == '/junkReSell/checkout/index') ? 'active':'';?>">
-                    <a href="<?php echo $app_path ?>checkout/index.php">Checkout</a>
+                    <a href="<?php echo $app_path ?>cart/checkout.php">Checkout</a>
                   </li>
             </ul>
          </div>
