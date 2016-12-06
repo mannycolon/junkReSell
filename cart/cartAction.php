@@ -33,7 +33,7 @@
       header("Location: viewCart.php");
     }elseif($_REQUEST['action'] == 'placeOrder' && $cart->totalItems() > 0 && !empty($_SESSION['sessCustomerID'])){
       //insert order details into database
-      $insertOrder = $db->query("INSERT INTO orders (userID, total_price, created, modified) VALUES ('".$_SESSION['sessCustomerID']."', '".$cart->total()."', '".date("Y-m-d H:i:s")."', '".date("Y-m-d H:i:s")."')");
+      $insertOrder = $db->query("INSERT INTO orders (userID, total_price, created, modified) VALUES ('".$_SESSION['sessCustomerID']."', '".$cart->totalPrice()."', '".date("Y-m-d H:i:s")."', '".date("Y-m-d H:i:s")."')");
       if($insertOrder){
         $orderID = $db->insert_id;
         $sql = '';
@@ -46,7 +46,7 @@
         $insertOrderItems = $db->multi_query($sql);
         if($insertOrderItems){
           $cart->destroy();
-          header("Location: orderSuccess.php?id=$orderID");
+          header("Location: orderConfirmation.php?id=$orderID");
         }else{
           header("Location: checkout.php");
         }
