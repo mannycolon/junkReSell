@@ -2,11 +2,7 @@
 <?php require_once('../util/main.php'); ?>
 <?php require_once('../util/userSession.php'); ?>
 <?php include '../view/header.php'; ?>
-<?php
-// initializ shopping cart class
-include 'Cart.php';
-$cart = new Cart;
-?>
+
     <main>
       <div class="container">
         <h1>Shopping Cart</h1>
