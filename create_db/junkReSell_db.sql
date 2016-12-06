@@ -94,7 +94,7 @@ CREATE TABLE `orders` (
   `status` enum('1','0') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-----------------------------------------------------------
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `product`
