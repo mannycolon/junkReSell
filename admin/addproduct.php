@@ -1,16 +1,15 @@
 <?php    //require_once(../util/db.php)
-  
+
     //Connect to database
     $dsn = 'mysql:host=localhost;dbname=junkReSell_db';
     $username = 'root';
     $password = '';
 
-    try 
+    try
     {
         $db = new PDO($dsn, $username, $password);
-        echo '<p>Connected to database</p>';
-    } 
-    catch (PDOException $e) 
+    }
+    catch (PDOException $e)
     {
         $error_message = $e->getMessage();
         echo '<p>Not connected to database</p>';
@@ -19,7 +18,7 @@
 
     //sets default if no set category_id
     $category_id = filter_input(INPUT_GET, 'category_id', FILTER_VALIDATE_INT);
-    if ($category_id == NULL || $category_id == FALSE) 
+    if ($category_id == NULL || $category_id == FALSE)
     {
         $category_id = 1;
     }
@@ -34,7 +33,8 @@
     $statement2->closeCursor();
 
 ?>
-
+<?php require_once('../util/main.php'); ?>
+<?php require_once('../util/userSession.php'); ?>
 <?php include '../view/header.php'; ?>
 
     <main>
@@ -43,13 +43,13 @@
 
 			<h4>Category:</h4>
 			<select name="category_id">
-        		<?php foreach ($categories as $category) : 
-            		if ($category['categoryID'] == $product['categoryID']) 
+        		<?php foreach ($categories as $category) :
+            		if ($category['categoryID'] == $product['categoryID'])
             		{
                 		$selected = 'selected';
             		}
 
-            		else 
+            		else
             		{
                 		$selected = '';
             		}
@@ -74,8 +74,7 @@
             <input type="text" name="date" value="<?php echo date("Y-m-d") ?>"><br><br>
 			<input id="button" type="submit" name="submit" value="Submit">
 			</form>
-		
-	</main>
-    </body>
 
+	   </main>
+    </body>
 </html>

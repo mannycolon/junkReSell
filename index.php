@@ -5,7 +5,6 @@
     <br>
     <table>
       <?php include 'category/categoryfunctions.php';
-
       $category_id = filter_input(INPUT_GET, 'category_id', FILTER_VALIDATE_INT);
       if ($category_id == NULL || $category_id == FALSE){
         $category_id = rand(1, 5);
@@ -62,10 +61,9 @@
                      width = "200px" height="200px"/>
                 <div class="caption">
                   <h3><?php echo $product['productName']; ?></h3>
-                  <h5>Price:</h5>
-                  <p>
-                    <?php echo $product['productPrice']; ?>
-                  </p>
+                  <h5>
+                    Price: <span class="price">$<?php echo $product['productPrice']; ?></span>
+                  </h5>
                   <h5>Description:</h5>
                   <p>
                     <?php echo $product['description']; ?>
