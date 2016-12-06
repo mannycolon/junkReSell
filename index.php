@@ -49,26 +49,33 @@
 <!-- the body section -->
 <body>
 <main>
-    <h1>junkReSell Homepage</h1><br>
-    <section>
+    <section style="padding-left: 60px; padding-right: 60px">
         <!-- display a table of products -->
         <h2><?php echo $category_name; ?></h2>
-        <table>
+        <div class="row">
         <?php foreach ($products as $product) : ?>
-            <tr>
-                <th><?php echo $product['productName']; ?></th>
-                <th>Description</th>
-                <th class="right">Price</th>
-            </tr>
-            <tr>
-                <td><a href="<?php echo $app_path ?>category/productpage.php?id=<?php echo $product['abbrvName']; ?>" >
+            <div class="col-sm-6 col-md-4" style="display: inline-block;">
+              <a href="<?php echo $app_path ?>category/productpage.php?id=<?php echo $product['abbrvName']; ?>" >
+              <div class="thumbnail" style="min-height: 650px; box-sizing: border-box;">
                 <img src="<?php echo $app_path ?>images/<?php echo $product['abbrvName'].'.png'; ?>"
-                	alt="<?php echo $app_path ?>images/<?php echo $product['abbrvName'].'.png'; ?>" width = "50%";/></a> </td>
-                <td><?php echo $product['description']; ?></td>
-                <td class="right"><?php echo $product['productPrice']; ?></td>
-            </tr>
+                     alt="<?php echo $app_path ?>images/<?php echo $product['abbrvName'].'.png'; ?>"
+                     width = "200px" height="200px"/>
+                <div class="caption">
+                  <h3><?php echo $product['productName']; ?></h3>
+                  <h5>Price:</h5>
+                  <p>
+                    <?php echo $product['productPrice']; ?>
+                  </p>
+                  <h5>Description:</h5>
+                  <p>
+                    <?php echo $product['description']; ?>
+                  </p>
+                </div>
+              </div>
+              </a>
+            </div>
             <?php endforeach; ?>
-        </table>
+            </div>
     </section>
 </main>
 </body>

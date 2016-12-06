@@ -34,7 +34,7 @@
               <td><?php echo '$'.$item["subtotal"].' USD'; ?></td>
               <td>
                 <a href="cartAction.php?action=removeCartItem&id=<?php echo $item["rowid"]; ?>"
-                  class="btn btn-danger" onclick="return confirm('Are you sure?')">
+                  class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?')">
                   <i class="glyphicon glyphicon-trash"></i>
                 </a>
               </td>
