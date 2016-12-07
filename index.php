@@ -35,7 +35,6 @@
       $products = $statement3->fetchAll();
       $statement3->closeCursor();
     ?>
-
     <section style="padding-left: 60px; padding-right: 60px">
         <h2><?php echo $category_name; ?></h2>
         <div class="row">
