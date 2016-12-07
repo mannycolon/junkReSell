@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 06, 2016 at 08:24 AM
+-- Generation Time: Dec 07, 2016 at 09:05 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.5.38
 
@@ -42,8 +42,9 @@ CREATE TABLE `addresses` (
 --
 
 INSERT INTO `addresses` (`addressID`, `userID`, `address`, `city`, `state`, `zipCode`, `phone`, `disabled`) VALUES
-(6, 16, '107 Church Street', 'Haledon', 'NJ', '07508', '9736894985', 0),
-(7, 18, '13 Hopper St', 'Prospect Park', 'NJ', '07507', '9736894985', 0);
+(30, 41, '13 Hopper St', 'Prospect Park', 'NJ', '07508', '9738885523', 0),
+(31, 41, '107 Church Street', 'Haledon', 'NJ', '07508', '9736894985', 0),
+(32, 42, '107 Church Street', 'Haledon', 'NJ', '07508', '9736894985', 0);
 
 -- --------------------------------------------------------
 
@@ -179,9 +180,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userID`, `email`, `password`, `firstname`, `lastname`, `shipAddressID`, `billingAddressID`) VALUES
-(16, 'colonmanuel7@gmail.com', 'mama', 'MANUEL', 'COLON', NULL, NULL),
-(17, 'maniel_1516@hotmail.com', 'mama', 'maniel', 'colon', NULL, NULL),
-(18, 'manu@gmail.com', 'mama', 'manu', 'hu', NULL, NULL);
+(41, 'maniel_1516@hotmail.com', 'test123', 'maniel', 'colon', 30, 31),
+(42, 'colonmanuel7@gmail.com', 'test123', 'MANUEL', 'COLON', 32, 32);
 
 --
 -- Indexes for dumped tables
@@ -240,7 +240,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `addresses`
 --
 ALTER TABLE `addresses`
-  MODIFY `addressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `addressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `administrators`
 --
@@ -255,12 +255,12 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `orderItems`
 --
 ALTER TABLE `orderItems`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `product`
 --
@@ -270,7 +270,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 --
 -- Constraints for dumped tables
 --

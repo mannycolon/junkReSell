@@ -22,6 +22,9 @@ $_SESSION['sessCustomerID'] = $row['userID'];
 // get customer details by session customer ID
 $query = $db->query("SELECT * FROM users WHERE userID = ".$_SESSION['sessCustomerID']);
 $custRow = $query->fetch_assoc();
+//get address
+$addressQuery = $db->query("SELECT * FROM addresses WHERE userID = ".$_SESSION['sessCustomerID']);
+$addressRow = $addressQuery->fetch_assoc();
 ?>
     <main>
 <div class="container">
@@ -63,10 +66,35 @@ $custRow = $query->fetch_assoc();
     </table>
     <div class="shipAddr">
         <h4>Shipping Details</h4>
-        <p><?php echo $custRow['firstname']; ?></p>
-        <p><?php echo $custRow['email']; ?></p>
-        <p><?php echo $custRow['phone']; ?></p>
-        <p><?php echo $custRow['address']; ?></p>
+        <?php if (isset($custRow)) :?>
+        <p>
+          <?php echo $custRow['firstname']; ?>
+          <?php echo $custRow['lastname']; ?>
+        </p>
+        <p>
+          <?php echo $custRow['email']; ?>
+        </p>
+        <?php else: ?>
+        <p style="color: red">
+          Unable to retrieve user's information, please go to your
+          account page and add your personal information.
+        </p>
+        <?php endif; ?>
+        <?php if (isset($addressRow)) :?>
+        <p>
+          <?php echo $addressRow['address'] . ","; ?>
+          <?php echo $addressRow['city'] . ","; ?>
+          <?php echo $addressRow['state'] . ","; ?>
+          <?php echo $addressRow['zipCode']; ?>
+        </p>
+        <p>
+          <?php echo $addressRow['phone']; ?>
+        </p>
+        <?php else: ?>
+          <p style="color: red">
+            No address information found in the database for: <b><?php echo $email ?></b>
+          </p>
+        <?php endif; ?>
     </div>
     <div class="footBtn">
         <a href="../index.php" class="btn btn-warning">
