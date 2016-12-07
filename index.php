@@ -2,9 +2,7 @@
 <?php require_once('util/userSession.php'); ?>
 <?php include 'view/header.php'; ?>
   <main class="nofloat">
-    <br>
-    <table>
-      <?php include 'category/categoryfunctions.php';
+    <?php include 'category/categoryfunctions.php';
       $category_id = filter_input(INPUT_GET, 'category_id', FILTER_VALIDATE_INT);
       if ($category_id == NULL || $category_id == FALSE){
         $category_id = rand(1, 5);
@@ -36,20 +34,9 @@
       $statement3->execute();
       $products = $statement3->fetchAll();
       $statement3->closeCursor();
+    ?>
 
-      ?>
-<!DOCTYPE html>
-<html>
-<!-- the head section -->
-<head>
-    <title>junkReSell Homepage</title>
-</head>
-
-<!-- the body section -->
-<body>
-<main>
     <section style="padding-left: 60px; padding-right: 60px">
-        <!-- display a table of products -->
         <h2><?php echo $category_name; ?></h2>
         <div class="row">
         <?php foreach ($products as $product) : ?>
