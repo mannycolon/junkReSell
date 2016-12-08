@@ -38,9 +38,9 @@
 	<table align="center">
 	<tbody>
 		<tr>
-		<td>Full Name</td>
-		<td>Email</td>
-		<td>Delete Admin Account</td>
+		<td style="font-weight: bold;">Full Name</td>
+		<td style="font-weight: bold;">Email</td>
+		<td style="font-weight: bold;" align="center">Delete Admin Account</td>
 		</tr>
 
 
@@ -50,7 +50,10 @@
 			<td><?php echo $admin['fullName']; ?></td>
 			<td><?php echo $admin['email']; ?></td>
 			<!--creates a link which allows admin to delete the user-->
-			<td><a href="deleteadmin.php?id=<?php echo $admin['email']; ?>">Delete</a></td>
+			<td align="center" style="padding-top: 4px; padding-bottom: 4px;">
+				<a href="deleteadmin.php?id=<?php echo $admin['email']; ?>" class="btn btn-default btn-sm" 
+					style="background-color:#990000; color:white; border-color:#990000">
+          		<span class="glyphicon glyphicon-trash"></span> Delete</a></td>
 			</tr>
 		<?php endforeach; ?></p>
 
