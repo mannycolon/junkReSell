@@ -12,17 +12,9 @@
     $product_description = mysqli_real_escape_string($db, $_POST['description']);
     $dateAdded = mysqli_real_escape_string($db, $_POST['date']);
 
-    $_SESSION['category_id'] = $category_id;  
-    $_SESSION['product_name'] = $product_name;  
-    $_SESSION['product_price'] = $product_price; 
-    $_SESSION['product_quantity'] = $product_quantity;
-    $_SESSION['image'] = $image_name;
-    $_SESSION['description'] = $product_description;
-    $_SESSION['date'] = $dateAdded;
-
     $bool = true;
 
-    //Query the account table
+    //query the product table
     $query = mysqli_query($db, "SELECT * FROM product");
 
     //displaying all rows from query
@@ -56,6 +48,7 @@
 ?>
 
 <?php require_once('../util/main.php'); ?>
+<?php require_once('../util/userSession.php'); ?>
 <?php include '../view/header.php'; ?>
   <body>
   
@@ -64,42 +57,42 @@
       <div class="container" style="padding-left: 300px;">
         <div class="panel panel-default" style="width:50%;">
           <div class="panel-heading" style="background-color: #4d79ff; color: white; font-size:18px;">Category ID:</div>
-          <div class="panel-body" style="font-size:18px;"><?php echo $_SESSION['category_id']; ?></div>
+          <div class="panel-body" style="font-size:18px;"><?php echo $category_id; ?></div>
         </div>
       </div>
 
       <div class="container" style="padding-left: 300px;">
         <div class="panel panel-default" style="width:50%;">
           <div class="panel-heading" style="background-color: #4d79ff; color: white; font-size:18px;">Product Name:</div>
-          <div class="panel-body" style="font-size:18px;"><?php echo $_SESSION['product_name']; ?></div>
+          <div class="panel-body" style="font-size:18px;"><?php echo $product_name; ?></div>
         </div>
       </div>
 
       <div class="container" style="padding-left: 300px;">
         <div class="panel panel-default" style="width:50%;">
           <div class="panel-heading" style="background-color: #4d79ff; color: white; font-size:18px;">Product Price:</div>
-          <div class="panel-body" style="font-size:18px;"><?php echo $_SESSION['product_price']; ?></div>
+          <div class="panel-body" style="font-size:18px;"><?php echo $product_price; ?></div>
         </div>
       </div>
 
       <div class="container" style="padding-left: 300px;">
         <div class="panel panel-default" style="width:50%;">
           <div class="panel-heading" style="background-color: #4d79ff; color: white; font-size:18px;">Product Quantity:</div>
-          <div class="panel-body" style="font-size:18px;"><?php echo $_SESSION['product_quantity']; ?></div>
+          <div class="panel-body" style="font-size:18px;"><?php echo $product_quantity; ?></div>
         </div>
       </div>
 
       <div class="container" style="padding-left: 300px;">
         <div class="panel panel-default" style="width:50%;">
           <div class="panel-heading" style="background-color: #4d79ff; color: white; font-size:18px;">Product Description:</div>
-          <div class="panel-body" style="font-size:18px;"><?php echo $_SESSION['description']; ?></div>
+          <div class="panel-body" style="font-size:18px;"><?php echo $product_description; ?></div>
         </div>
       </div>
 
       <div class="container" style="padding-left: 300px;">
         <div class="panel panel-default" style="width:50%;">
           <div class="panel-heading" style="background-color: #4d79ff; color: white; font-size:18px;">Product Added:</div>
-          <div class="panel-body" style="font-size:18px;"><?php echo $_SESSION['date']; ?></div>
+          <div class="panel-body" style="font-size:18px;"><?php echo $dateAdded; ?></div>
         </div>
       </div>
       <br><p style="padding-left: 700px;"><a href="index.php">Return to Admin Main Page</a></p>
