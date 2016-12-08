@@ -1,11 +1,11 @@
 <?php
 
-	/*Displays the admin information available in a
-	table. */
+    /*Displays the admin information available in a
+    table. */
 
-	//connect to database
-	include '../category/databaseConnect.php';
-	global $db;
+    //connect to database
+    include '../category/databaseConnect.php'; 
+    global $db;
 
     //get tables for admin
     $queryAdmins = "SELECT *
@@ -56,6 +56,8 @@
 
 	</tbody>
 	</table>
+	<br><p align="center"><a href="createadmin.php">Create Admin Account</a></p>
+	<p align="center"><a href="index.php">Return to Admin Main Page</a></p>
 
 </body>
 </html>
