@@ -102,6 +102,7 @@
           <div class="panel-body" style="font-size:18px;"><?php echo $_SESSION['date']; ?></div>
         </div>
       </div>
+      <br><p style="padding-left: 700px;"><a href="index.php">Return to Admin Main Page</a></p>
     
   </body>
 </main>
