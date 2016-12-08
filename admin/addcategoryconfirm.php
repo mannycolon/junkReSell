@@ -50,13 +50,14 @@
       
       <h3 align="center">Category Addition Confirmation</h3>
 
-      <div class="container" style="padding-left: 300px;">
+      <div class="container" style="padding-left: 400px;">
         <div class="panel panel-default" style="width:50%;">
           <div class="panel-heading" style="background-color: #4d79ff; color: white; font-size:18px;">Category Name:</div>
           <div class="panel-body" style="font-size:18px;"><?php echo $_SESSION['category_name']; ?></div>
         </div>
       </div>
-    
-  </body>
+      <br><p align="center"><a href="index.php">Return to Admin Main Page</a></p>
 
+  </body>
+ 
 </html>
