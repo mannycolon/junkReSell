@@ -1,7 +1,7 @@
 <?php
 
     //connect to database
-    include 'dbconnection.php';
+    include '../category/databaseConnect.php';
     global $db;
 
     //sets default if no set category_id
