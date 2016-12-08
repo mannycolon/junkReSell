@@ -50,32 +50,33 @@
 
 	<div class="form-group">
 		<h3>Name:</h3>
-		<input type="text" name="name" class="form-control"><br>
+		<input type="text" name="name" class="form-control" required><br>
 	</div>
 	<div class="form-group">
 		<h3>Price:</h3>
-		<input type="text" name="price" class="form-control"><br>
+		<input type="text" name="price" class="form-control" placeholder="0.00" pattern="^\d*(\.\d{2}$)?" required><br>
 	</div>
 	<div class="form-group">
 		<h3>Quantity:</h3>
-		<input type="text" name="quantity" class="form-control"><br><br>
+		<input type="text" name="quantity" class="form-control" required><br><br>
 	</div>
 	<div class="form-group">
 		<h3>Image filename:</h3>
-		<input type="text" name="image" class="form-control"><br><br>
+		<input type="text" name="image" class="form-control" required><br><br>
 	</div>
 	<div class="form-group">
 		<h3>Description:</h3>
-		<textarea rows="10" cols="50" name="description" class="form-control"></textarea>
+		<textarea rows="10" cols="50" name="description" class="form-control" required></textarea>
 	</div>
 	<div class="form-group">
 		<h3>Date Added:</h3>
-		<input type="text" name="date" value="<?php echo date("Y-m-d") ?>" class="form-control"><br><br>
+		<input type="text" name="date" value="<?php echo date("Y-m-d") ?>" class="form-control" required><br><br>
 	</div>
 		<input id="button" type="submit" name="submit" value="Submit" class="btn btn-primary dropdown-toggle" 
 		       data-toggle="dropdown" style="background-color: #29a329; font-size: 20px; border-color:#29a329;">
 	</form>
 
 	</main>
+	<br><p align="center"><a href="index.php">Return to Admin Main Page</a></p>
     </body>
 </html>
