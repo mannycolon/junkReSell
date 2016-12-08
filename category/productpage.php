@@ -19,30 +19,58 @@
 <html>
 <!--Display details of the product with the specific id-->
 <?php foreach ($products as $product) : ?>
-    <!--Print product name-->
-    <h1><?php echo htmlspecialchars($product['productName']); ?></h1>
+  <div class="row" style="padding-left: 60px; padding-right: 60px; padding-top: 30px;">
+    <div class="col-sm-6 col-md-6">
     <!--Add picture-->
-    <div id="left_column">
-        <p><img src="<?php echo $app_path ?>/images/<?php echo $product['abbrvName'].'.png'; ?>"
-            alt="<?php echo $app_path ?>/images/<?php echo $product['abbrvName'].'.png'; ?>" /></p>
-    </div>
+      <img src="<?php echo $app_path ?>/images/<?php echo $product['abbrvName'].'.png'; ?>"
+           alt="<?php echo $app_path ?>/images/<?php echo $product['abbrvName'].'.png'; ?>"
+           width="550px"/>
 
+    </div>
     <!--Add product details-->
-    <div id="right_column">
-        <p><b>Price:</b>
-            <?php echo '$' . $product['productPrice']; ?></p>
+    <div class="col-sm-4 col-md-6">
+      <!--Print product name-->
+      <h1><?php echo htmlspecialchars($product['productName']); ?></h1><br /><br />
         <form action="<?php echo $app_path ?>cart/cartAction.php?action=addToCart&id=<?php echo $product['productID']; ?>"
               method="get" id="add_to_cart_form">
-            <input type="hidden" name="action" value="addToCart" />
-            <input type="hidden" name="id"
-                   value="<?php echo $product['productID']; ?>" />
-            <b>Quantity:</b>&nbsp;
-            <input type="text" name="quantity" value="1" size="2" />
-            <input type="hidden" name="price" value="<?php echo $product['productPrice']; ?>" />
-            <input type="submit" value="Add to Cart" />
+          <table class="table">
+            <tbody>
+              <tr>
+                <td><br />
+                  <b>Price:</b>
+                  <span class="price">
+                    <?php echo '$' . $product['productPrice']; ?>
+                  </span>
+                </td>
+                <td><br />
+                  <input type="hidden" name="action" value="addToCart" />
+                </td>
+                <td><br />
+                  <input type="hidden" name="id"
+                         value="<?php echo $product['productID']; ?>" />
+                </td>
+                <td><br />
+                  <b>Quantity:</b>&nbsp;
+                  <input type="text" name="quantity" value="1" size="2" class="quantityBox" />
+                </td>
+                <td><br />
+                  <input type="hidden" name="price" value="<?php echo $product['productPrice']; ?>" />
+                </td>
+                <td><br />
+                  <button type="submit" class="btn btn-success btn-block">
+                    <span class="glyphicon glyphicon-shopping-cart"
+                          aria-hidden="true"></span> Add to Cart
+                  </button>
+                </td>
+              </tr>
+            <tbody>
+          </table>
         </form>
         <h2>Description</h2>
-        <?php echo $product['description'] ?>
-        <?php endforeach; ?>
+          <p>
+            <?php echo $product['description'] ?>
+          </p>
+            <?php endforeach; ?>
     </div>
+  </div>
 </html>
