@@ -1,20 +1,8 @@
-<?php    //require_once(../util/db.php)
+<?php
 
-    //Connect to database
-    $dsn = 'mysql:host=localhost;dbname=junkReSell_db';
-    $username = 'root';
-    $password = '';
-
-    try
-    {
-        $db = new PDO($dsn, $username, $password);
-    }
-    catch (PDOException $e)
-    {
-        $error_message = $e->getMessage();
-        echo '<p>Not connected to database</p>';
-        exit();
-    }
+    //connect to database
+    include 'dbconnection.php';
+    global $db;
 
     //sets default if no set category_id
     $category_id = filter_input(INPUT_GET, 'category_id', FILTER_VALIDATE_INT);
@@ -38,43 +26,56 @@
 <?php include '../view/header.php'; ?>
 
     <main>
-			<h1>Add Product </h1>
-			<form method="POST" action="addproductconfirm.php">
+	<h1 style="padding-left: 740px; padding-right: 740px">Add Product </h1><br>
+	<form method="POST" action="addproductconfirm.php" style="padding-left: 600px; padding-right: 600px">
 
-			<h4>Category:</h4>
-			<select name="category_id">
-        		<?php foreach ($categories as $category) :
-            		if ($category['categoryID'] == $product['categoryID'])
-            		{
-                		$selected = 'selected';
-            		}
+	<h3>Category:</h3>
+	<select name="category_id" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: #004080; font-size: 20px; border-color:#004080;">
+		<?php foreach ($categories as $category) :
+		if ($category['categoryID'] == $product['categoryID'])
+		{
+			$selected = 'selected';
+		}
 
-            		else
-            		{
-                		$selected = '';
-            		}
-        		?>
-            		<option value="<?php echo $category['categoryID']; ?>"<?php echo $selected ?>>
-                		<?php echo htmlspecialchars($category['categoryName']); ?>
-            		</option>
-        		<?php endforeach; ?>
-       		</select><br>
+		else
+		{
+			$selected = '';
+		}
+		?>
+		<option style="background-color:white; color:black;" value="<?php echo $category['categoryID']; ?>"<?php echo $selected ?>>
+			<?php echo htmlspecialchars($category['categoryName']); ?>
+		</option>
+		<?php endforeach; ?>
+       	</select><br>
 
-			<h4>Name:</h4>
-			<input type="text" name="name"><br>
-			<h4>Price:</h4>
-			<input type="text" name="price"><br>
-			<h4>Quantity:</h4>
-			<input type="text" name="quantity"><br><br>
-            <h4>Image filename:</h4>
-            <input type="text" name="image"><br><br>
-            <h4>Description:</h4>
-            <textarea rows="10" cols="50" name="description"></textarea>
-            <h4>Date Added:</h4>
-            <input type="text" name="date" value="<?php echo date("Y-m-d") ?>"><br><br>
-			<input id="button" type="submit" name="submit" value="Submit">
-			</form>
+	<div class="form-group">
+		<h3>Name:</h3>
+		<input type="text" name="name" class="form-control"><br>
+	</div>
+	<div class="form-group">
+		<h3>Price:</h3>
+		<input type="text" name="price" class="form-control"><br>
+	</div>
+	<div class="form-group">
+		<h3>Quantity:</h3>
+		<input type="text" name="quantity" class="form-control"><br><br>
+	</div>
+	<div class="form-group">
+		<h3>Image filename:</h3>
+		<input type="text" name="image" class="form-control"><br><br>
+	</div>
+	<div class="form-group">
+		<h3>Description:</h3>
+		<textarea rows="10" cols="50" name="description" class="form-control"></textarea>
+	</div>
+	<div class="form-group">
+		<h3>Date Added:</h3>
+		<input type="text" name="date" value="<?php echo date("Y-m-d") ?>" class="form-control"><br><br>
+	</div>
+		<input id="button" type="submit" name="submit" value="Submit" class="btn btn-primary dropdown-toggle" 
+		       data-toggle="dropdown" style="background-color: #29a329; font-size: 20px; border-color:#29a329;">
+	</form>
 
-	   </main>
+	</main>
     </body>
 </html>
