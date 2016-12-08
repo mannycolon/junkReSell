@@ -10,16 +10,18 @@
 ?>
 <?php include '../view/header.php'; ?>
     <main class="nofloat">
-      <h2>Admin Account</h2>
-      <p> Hello <?php print "$user"?>!</p>
-      <!--uploading an image got the product-->
-      <form action="fileupload.php" method="post" enctype="multipart/form-data">
+      <h2 align="center">Admin Account</h2>
+      <h3 align="center"> Hello, <?php print "$user"?>!</h3>
+      <form action="fileupload.php" method="post" enctype="multipart/form-data" style="padding-left: 740px; padding-right: 740px">
         Select image to upload:
-        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input type="file" name="fileToUpload" id="fileToUpload"><br>
         <input type="submit" value="Upload Image" name="submit">
       </form>
-    <h2>Links</h2>
-    <p><a href="addproduct.php">Add Product</a></p>
+    <h2 align="center">Choose an option below:</h2>
+    <p align="center"><a href="addproduct.php" class="btn btn-info" role="button">Add Product</a>&nbsp
+    <a href="addcategory.php" class="btn btn-info" role="button">Add Category</a></p>
+    <p align="center"><a href="viewadmins.php" class="btn btn-info" role="button">View Admins</a>&nbsp&nbsp
+    <a href="viewusers.php" class="btn btn-info" role="button">View Users</a></p>
     </main>
   </body>
 </html>
