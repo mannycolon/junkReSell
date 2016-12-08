@@ -43,8 +43,9 @@ function all_categories()
         echo "<ul>";
         foreach ($categories as $category)
         {
-            echo "<li>";
-            echo '<a href="categoryPage.php?id=' . $category['categoryID'] . '">'; 
+            echo "<li style='list-style: none;'>";
+            echo '<a href="categoryPage.php?id=' . $category['categoryID'] . '" class="list-group-item" 
+                style="width: 30%; color: green; font-size: 20px;"">'; 
             echo $category['categoryName'];
             echo "</a>"; 
             echo "</li>";
