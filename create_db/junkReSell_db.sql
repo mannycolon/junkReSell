@@ -19,6 +19,9 @@ SET time_zone = "+00:00";
 --
 -- Database: `junkReSell_db`
 --
+DROP DATABASE IF EXISTS junkReSell_db;
+CREATE DATABASE junkReSell_db;
+USE junkReSell_db;
 
 -- --------------------------------------------------------
 
