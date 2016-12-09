@@ -3,19 +3,6 @@
 <?php include 'view/header.php'; ?>
   <main class="nofloat">
     <?php include 'category/categoryfunctions.php';
-      $category_id = filter_input(INPUT_GET, 'category_id', FILTER_VALIDATE_INT);
-      if ($category_id == NULL || $category_id == FALSE){
-        $category_id = rand(1, 5);
-      }
-      // Get name for selected category
-      $queryCategory = 'SELECT * FROM category
-                        WHERE categoryID = :category_id';
-      $statement1 = $db->prepare($queryCategory);
-      $statement1->bindValue(':category_id', $category_id);
-      $statement1->execute();
-      $category = $statement1->fetch();
-      $category_name = $category['categoryName'];
-      $statement1->closeCursor();
 
       // Get all categories
       $queryAllCategories = 'SELECT * FROM category
@@ -24,42 +11,29 @@
       $statement2->execute();
       $categories = $statement2->fetchAll();
       $statement2->closeCursor();
-
-      // Get products for selected category
-      $queryProducts = 'SELECT * FROM product
-                        WHERE categoryID = :category_id
-                        ORDER BY productID';
-      $statement3 = $db->prepare($queryProducts);
-      $statement3->bindValue(':category_id', $category_id);
-      $statement3->execute();
-      $products = $statement3->fetchAll();
-      $statement3->closeCursor();
     ?>
     <section style="padding-left: 60px; padding-right: 60px">
-        <h2><?php echo $category_name; ?></h2>
-        <div class="row">
-        <?php foreach ($products as $product) : ?>
-            <div class="col-sm-6 col-md-4" style="display: inline-block;">
-              <a href="<?php echo $app_path ?>category/productpage.php?id=<?php echo $product['abbrvName']; ?>" >
-              <div class="thumbnail" style="min-height: 650px; box-sizing: border-box;">
-                <img src="<?php echo $app_path ?>images/<?php echo $product['abbrvName'].'.png'; ?>"
-                     alt="<?php echo $app_path ?>images/<?php echo $product['abbrvName'].'.png'; ?>"
-                     width = "200px" height="200px"/>
-                <div class="caption">
-                  <h3><?php echo $product['productName']; ?></h3>
-                  <h5>
-                    Price: <span class="price">$<?php echo $product['productPrice']; ?></span>
-                  </h5>
-                  <h5>Description:</h5>
-                  <p>
-                    <?php echo $product['description']; ?>
-                  </p>
-                </div>
-              </div>
-              </a>
+
+      <!--create container for website name and description-->
+      <div class="container">
+        <div class="jumbotron">
+          <h1 align="center">junkReSell</h1>      
+          <h3 align="center">Sell your products on our site</h3>
+        </div>    
+      </div>
+      <!--create panel for each category-->  
+      <div class="row">
+      <?php foreach ($categories as $category) : ?>
+          <div class="col-sm-4">
+            <div class="panel panel-primary" style="border-color:grey;">
+              <div class="panel-heading" style="background-color:#009973; font-size:18px;"><?php echo $category['categoryName']; ?></div>
+              <div class="img-responsive">
+                <a href = "<?php echo $app_path ?>category/categorypage.php?id=<?php echo $category['categoryID']; ?>">
+                <img src="<?php echo $app_path ?>images/<?php echo $category['categoryName'].'.png'; ?>" class="img-responsive" style="width:100%;height: 250px;" alt="<?php echo $app_path ?>images/<?php echo $categories['categoryName'].'.png'; ?>"></a></div>
             </div>
-            <?php endforeach; ?>
-            </div>
+          </div>
+      <?php endforeach; ?>
+      </div>
     </section>
 </main>
 </body>
