@@ -1,9 +1,13 @@
 <?php
-
+  //connect to database
   include '../cart/dbConfig.php';
 
   if($_SERVER["REQUEST_METHOD"] == "POST")
   {
+    //get 'id' of product when admin clicks on product in editproduct.php
+    $productID = $_GET['id'];
+
+    //admin input for new produt details
     $category_id = mysqli_real_escape_string($db, $_POST['category_id']);
     $product_name = mysqli_real_escape_string($db, $_POST['name']);
     $product_price = mysqli_real_escape_string($db, $_POST['price']);
@@ -12,38 +16,13 @@
     $product_description = mysqli_real_escape_string($db, $_POST['description']);
     $dateAdded = mysqli_real_escape_string($db, $_POST['date']);
 
-    $bool = true;
-
-    //query the product table
+    //select from product table and update details with user input
     $query = mysqli_query($db, "SELECT * FROM product");
 
-    //displaying all rows from query
-    while($row = mysqli_fetch_array($query))
-    {
-      /*the first product row is passed on to $table_products,
-      and so on until the query is finished */
-      $table_products = $row['productName'];
+    mysqli_query($db, "UPDATE product SET categoryID=$category_id, productName='$product_name', productPrice='$product_price', productQuantity='$product_quantity', abbrvName='$image_name', description='$product_description', dateAdded='$dateAdded' WHERE abbrvName='$productID'");
+    //prompt to let user know edit was succesful
+    print '<script>alert("Successully edited product!");</script>';
 
-      //checks if there are any matching fields
-      if($product_name == $table_products)
-      {
-        $bool = false;
-        //Tell the user that the product already exists
-        print '<script>alert("Product already exists!");</script>';
-        //redirects to register.html
-        print '<script>window.location.assign("addproduct.php");</script>';
-      }
-
-    }
-
-    if($bool)
-    {
-      //inserts the values to table account
-      mysqli_query($db, "INSERT INTO product (categoryID, productName, productPrice, productQuantity, abbrvName, description, dateAdded) 
-        VALUES ('$category_id', '$product_name', '$product_price', '$product_quantity', '$image_name', '$product_description', '$dateAdded')");
-      //prompt to let user know registration was succesful
-      print '<script>alert("Successully added product!");</script>';
-    }
   }
 ?>
 
@@ -52,7 +31,7 @@
 <?php include '../view/header.php'; ?>
   <body>
   
-      <h3 style="padding-left: 600px; padding-right: 600px">Product Addition Confirmation</h3>
+      <h3 style="padding-left: 640px; padding-right: 600px">Product Edit Confirmation</h3>
  
       <div class="container" style="padding-left: 300px;">
         <div class="panel panel-default" style="width:50%;">

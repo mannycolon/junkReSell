@@ -40,8 +40,8 @@
       //insert the values to table admins
       mysqli_query($db, "INSERT INTO administrators (fullName, email, password) 
         VALUES ('$full_name', '$email_address', '$password')");
-      //prompt to let user know registration was succesful
-      print '<script>alert("Successully registered!");</script>';
+      //prompt to let user know creation was succesful
+      print '<script>alert("Successully created account!");</script>';
     }
   }
 ?>

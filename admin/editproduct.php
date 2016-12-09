@@ -1,17 +1,21 @@
 <?php
-
-    //connect to database
-    include '../category/databaseConnect.php';
+	//connect to database
+	include '../category/databaseConnect.php';
     global $db;
 
-    //sets default if no set category_id
-    $category_id = filter_input(INPUT_GET, 'category_id', FILTER_VALIDATE_INT);
-    if ($category_id == NULL || $category_id == FALSE)
-    {
-        $category_id = 1;
-    }
+    //get 'id' of product when admin clicks on product in viewproducts.php
+    $productID = $_GET['id'];
 
-    // Get all categories and print a list of categories
+    //select from product table where the id matches
+	$query = "SELECT * FROM product
+              WHERE abbrvName = '$productID'";
+
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $products = $statement->fetchAll();
+    $statement->closeCursor();
+
+    //select from categories table to display in drop-down
     $queryAllCategories = 'SELECT * FROM category
                            ORDER BY categoryID';
 
@@ -19,16 +23,17 @@
     $statement2->execute();
     $categories = $statement2->fetchAll();
     $statement2->closeCursor();
-
 ?>
+
 <?php require_once('../util/main.php'); ?>
 <?php require_once('../util/userSession.php'); ?>
 <?php include '../view/header.php'; ?>
 
     <main>
-	<h1 style="padding-left: 740px; padding-right: 740px">Add Product </h1><br>
-	<form method="POST" action="addproductconfirm.php" style="padding-left: 600px; padding-right: 600px">
+	<h1 style="padding-left: 740px; padding-right: 740px">Edit Product </h1><br>
+	<form method="POST" action="editproductconfirm.php?id=<?php echo $products[0]['abbrvName']; ?>" style="padding-left: 600px; padding-right: 600px">
 
+	<!--Drop-down takes on value of category chosen by admin-->
 	<h3>Category:</h3>
 	<select name="category_id" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: #004080; font-size: 20px; border-color:#004080;">
 		<?php foreach ($categories as $category) :
@@ -48,40 +53,43 @@
 		<?php endforeach; ?>
        	</select><br>
 
+    <!--Allows admin to edit the product by echoing the product details stored in the database-->
 	<div class="form-group">
 		<h3>Name:</h3>
-		<input type="text" name="name" class="form-control" required><br>
+		<input type="text" name="name" class="form-control" value="<?php echo $products[0]['productName']; ?>" required><br>
 	</div>
 	<div class="form-group">
 		<h3>Price:</h3>
-		<input type="text" name="price" class="form-control" placeholder="0.00" pattern="^\d*(\.\d{2}$)?" required><br>
+		<input type="text" name="price" class="form-control" placeholder="0.00" pattern="^\d*(\.\d{2}$)?" 
+			value="<?php echo $products[0]['productPrice']; ?>" required><br>
 	</div>
 	<div class="form-group">
 		<h3>Quantity:</h3>
-		<input type="text" name="quantity" class="form-control" required><br><br>
+		<input type="text" name="quantity" class="form-control" value="<?php echo $products[0]['productQuantity']; ?>" required><br><br>
 	</div>
 	<div class="form-group">
 		<h3>Image filename:</h3>
-		<input type="text" name="image" class="form-control" required><br><br>
+		<input type="text" name="image" class="form-control" value="<?php echo $products[0]['abbrvName']; ?>" required><br><br>
 	</div>
 	<div class="form-group">
 		<h3>Description:</h3>
-		<textarea rows="10" cols="50" name="description" class="form-control" required></textarea>
+		<textarea rows="10" cols="50" name="description" class="form-control" required><?php echo $products[0]['description']; ?></textarea>
 	</div>
 	<div class="form-group">
 		<h3>Date Added:</h3>
-		<input type="text" name="date" value="<?php echo date("Y-m-d") ?>" class="form-control" required><br><br>
+		<input type="text" name="date" class="form-control" value="<?php echo $products[0]['dateAdded']; ?>" required><br><br>
 	</div>
 		<input id="button" type="submit" name="submit" value="Submit" class="btn btn-primary dropdown-toggle" 
 		       data-toggle="dropdown" style="background-color: #29a329; font-size: 20px; border-color:#29a329;">
-	</form>
+	</form><br>
 
+	<!--Allows admin to upload an image into the images folder-->
 	<form action="../account/fileupload.php" method="post" enctype="multipart/form-data" style="padding-left: 600px; padding-right: 600px">
-        	<h4>Select image to upload before clicking "Submit":</h4>
-        	<input type="file" name="fileToUpload" id="fileToUpload"><br>
+        <h4>Select image to upload before clicking "Submit":</h4>
+        <input type="file" name="fileToUpload" id="fileToUpload"><br>
         <input type="submit" value="Upload Image" name="submit">
-    	</form>
-	    
+    </form>
+
 	</main>
 	<br><p align="center"><a href="index.php">Return to Admin Main Page</a></p>
     </body>
