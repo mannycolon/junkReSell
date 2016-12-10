@@ -22,9 +22,16 @@ $_SESSION['sessCustomerID'] = $row['userID'];
 // get customer details by session customer ID
 $query = $db->query("SELECT * FROM users WHERE userID = ".$_SESSION['sessCustomerID']);
 $custRow = $query->fetch_assoc();
-//get address
-$addressQuery = $db->query("SELECT * FROM addresses WHERE userID = ".$_SESSION['sessCustomerID']);
+$_SESSION['shipAddressID'] = $custRow["shipAddressID"];
+$_SESSION['billingAddressID'] = $custRow["billingAddressID"];
+
+//get ship Address
+$addressQuery = $db->query("SELECT * FROM addresses WHERE addressID = ".$custRow["shipAddressID"]);
 $addressRow = $addressQuery->fetch_assoc();
+
+//get billing Address
+$billAddressQuery = $db->query("SELECT * FROM addresses WHERE addressID = ".$custRow["billingAddressID"]);
+$billAddressRow = $billAddressQuery->fetch_assoc();
 ?>
     <main>
 <div class="container">
@@ -65,14 +72,13 @@ $addressRow = $addressQuery->fetch_assoc();
     </tfoot>
     </table>
     <div class="shipAddr">
+      <div class="row">
+        <div class="col-sm-4 col-md-4">
         <h4>Shipping Details</h4>
         <?php if (isset($custRow)) :?>
         <p>
           <?php echo $custRow['firstname']; ?>
           <?php echo $custRow['lastname']; ?>
-        </p>
-        <p>
-          <?php echo $custRow['email']; ?>
         </p>
         <?php else: ?>
         <p style="color: red">
@@ -95,6 +101,25 @@ $addressRow = $addressQuery->fetch_assoc();
             No address information found in the database for: <b><?php echo $email ?></b>
           </p>
         <?php endif; ?>
+      </div>
+      <div class="col-sm-4 col-md-4">
+        <h4>Billing address</h4>
+        <?php if (isset($addressRow)) :?>
+        <p>
+          <?php echo $billAddressRow['address'] . ","; ?>
+          <?php echo $billAddressRow['city'] . ","; ?>
+          <?php echo $billAddressRow['state'] . ","; ?>
+          <?php echo $billAddressRow['zipCode']; ?>
+        </p>
+        <?php else: ?>
+          <p style="color: red">
+            No address information found in the database for: <b><?php echo $email ?></b>
+          </p>
+        <?php endif; ?>
+      </div>
+
+
+    </div>
     </div>
     <div class="footBtn">
         <a href="../index.php" class="btn btn-warning">
