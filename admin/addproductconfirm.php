@@ -1,15 +1,12 @@
 <?php
+  //connect to database
   include '../util/dbConfig.php';
+  date_default_timezone_set("America/New_York");
 
   if($_SERVER["REQUEST_METHOD"] == "POST")
   {
-    $category_id = mysql_real_escape_string($_POST['category_id']);
-    $product_name = mysql_real_escape_string($_POST['name']);
-    $product_price = mysql_real_escape_string($_POST['price']);
-    $product_quantity = mysql_real_escape_string($_POST['quantity']);
-    $image_name = mysql_real_escape_string($_POST['image']);
-    $product_description = mysql_real_escape_string($_POST['description']);
-    $dateAdded = mysql_real_escape_string($_POST['date']);
+    //get only the product name first to compare with table
+    $product_name = $_POST['name'];
     $bool = true;
     //query the product table
     $stmt = $db->query('SELECT * FROM product');
@@ -30,9 +27,27 @@
 
     }
     if($bool){
-      //inserts the values to table account
-      $db->exec("INSERT INTO product (categoryID, productName, productPrice, productQuantity, abbrvName, description, dateAdded)
-        VALUES ('$category_id', '$product_name', '$product_price', '$product_quantity', '$image_name', '$product_description', '$dateAdded')");
+      // set the PDO error mode to exception
+      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      // prepare sql and bind parameters
+      $stmt = $db->prepare("INSERT INTO product (categoryID, productName, productPrice, productQuantity, abbrvName, description, dateAdded) VALUES (:category_id, :name, :price, :quantity, :fileToUpload, :description, :dateAdded)");
+      $stmt->bindParam(':category_id', $category_id);
+      $stmt->bindParam(':name', $product_name);
+      $stmt->bindParam(':price', $product_price);
+      $stmt->bindParam(':quantity', $product_quantity);
+      $stmt->bindParam(':fileToUpload', $image_name);
+      $stmt->bindParam(':description', $product_description);
+      $stmt->bindParam(':dateAdded', $dateAdded);
+      //get user input from addproduct.php
+      $category_id = $_POST['category_id'];
+      $product_name = $_POST['name'];
+      $product_price = $_POST['price'];
+      $product_quantity = $_POST['quantity'];
+      $image_name = basename($_POST['fileToUpload'], '.png'); //removes png file extension from image that was uploaded
+      $product_description = $_POST['description'];
+      $dateAdded = date("Y-m-d"); //adds current date
+      //executes query
+      $stmt->execute();
       //prompt to let user know registration was succesful
       print '<script>alert("Successully added product!");</script>';
     }

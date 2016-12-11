@@ -2,7 +2,8 @@
 include '../util/dbConfig.php';
 
   if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $category_name = mysql_real_escape_string($_POST['category_name']);
+    //get only the category name first to compare with table
+    $category_name = $_POST['category_name'];;
     $bool = true;
     $stmt = $db->query('SELECT * FROM category');
 
@@ -15,7 +16,15 @@ include '../util/dbConfig.php';
       }
     }
     if($bool){
-      $db->exec("INSERT INTO category (categoryName) VALUES ('$category_name')");
+      // set the PDO error mode to exception
+      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      // prepare sql and bind parameters
+      $stmt = $db->prepare("INSERT INTO category (categoryName) VALUES (:name)");
+      $stmt->bindParam(':name', $category_name);
+      //get user input from addcategory.php
+      $category_name = $_POST['category_name'];
+      //executes query
+      $stmt->execute();
       print '<script>alert("Successully added category!");</script>';
     }
   }
