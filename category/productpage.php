@@ -1,11 +1,8 @@
 <?php require_once('../util/main.php'); ?>
 <?php include '../view/header.php';
-
-    include 'categoryfunctions.php';
-
+      include 'categoryfunctions.php';
     //get id of product from index.php
     $pID = $_GET['id'];
-
     //get table for selected product
     $queryProduct = "SELECT *
                      FROM product
@@ -14,9 +11,8 @@
     $result->execute();
     $products = $result->fetchAll();
     $result->closeCursor();
-
 ?>
-<html>
+
 <!--Display details of the product with the specific id-->
 <?php foreach ($products as $product) : ?>
   <div class="row" style="padding-left: 60px; padding-right: 60px; padding-top: 30px;">
@@ -25,7 +21,6 @@
       <img src="<?php echo $app_path ?>/images/<?php echo $product['abbrvName'].'.png'; ?>"
            alt="<?php echo $app_path ?>/images/<?php echo $product['abbrvName'].'.png'; ?>"
            width="550px"/>
-
     </div>
     <!--Add product details-->
     <div class="col-sm-4 col-md-6">
