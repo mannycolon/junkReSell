@@ -4,37 +4,41 @@
 <?php include '../view/header.php'; ?>
 <?php
 // include database configuration file
-include 'dbConfig.php';
+include '../util/dbConfig.php';
 // redirect to home if cart is empty
 if($cart->totalItems() <= 0){
     header("Location: ../index.php");
 }
-// redirect to login page if no user logged in
-if(!$_SESSION['user']){
+//redirect admin if he tries to make a purchase
+if(isset($_SESSION['admin'])){
+  header("Location: ../cart/adminError.php");
+}elseif (!$_SESSION['user']) {
+  // redirect to login page if no user logged in
   header("Location: ../account/login.php");
 }
+
 //get current user's userID to be used for checkout
 $email = $_SESSION['user'];
 $userQuery = $db->query("SELECT * FROM users WHERE email='$email'");
-$row = $userQuery->fetch_assoc();
+$row = $userQuery->fetch(PDO::FETCH_ASSOC);
 // set customer ID in session
 $_SESSION['sessCustomerID'] = $row['userID'];
 // get customer details by session customer ID
 $query = $db->query("SELECT * FROM users WHERE userID = ".$_SESSION['sessCustomerID']);
-$custRow = $query->fetch_assoc();
+$custRow = $query->fetch(PDO::FETCH_ASSOC);
 $_SESSION['shipAddressID'] = $custRow["shipAddressID"];
 $_SESSION['billingAddressID'] = $custRow["billingAddressID"];
 
 //get ship Address
 $addressQuery = $db->query("SELECT * FROM addresses WHERE addressID = ".$custRow["shipAddressID"]);
-$addressRow = $addressQuery->fetch_assoc();
+$addressRow = $addressQuery->fetch(PDO::FETCH_ASSOC);
 
 //get billing Address
 $billAddressQuery = $db->query("SELECT * FROM addresses WHERE addressID = ".$custRow["billingAddressID"]);
-$billAddressRow = $billAddressQuery->fetch_assoc();
+$billAddressRow = $billAddressQuery->fetch(PDO::FETCH_ASSOC);
 ?>
-    <main>
-<div class="container">
+<main>
+  <div class="container">
     <h1>Order Preview</h1>
     <table class="table">
     <thead>
@@ -117,8 +121,6 @@ $billAddressRow = $billAddressQuery->fetch_assoc();
           </p>
         <?php endif; ?>
       </div>
-
-
     </div>
     </div>
     <div class="footBtn">
@@ -129,7 +131,7 @@ $billAddressRow = $billAddressQuery->fetch_assoc();
           Place Order <i class="glyphicon glyphicon-menu-right"></i>
         </a>
     </div>
-</div>
+    </div>
 </main>
 </body>
 </html>

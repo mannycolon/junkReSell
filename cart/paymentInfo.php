@@ -2,7 +2,13 @@
 <?php require_once('../util/main.php'); ?>
 <?php require_once('../util/userSession.php'); ?>
 <?php include '../view/header.php'; ?>
-
+<?php
+if($_SESSION['user']){
+}else{
+  //redirect if user is not logged in
+  header("location: $app_path");
+}
+?>
     <div class="creditCardForm">
       <div class="heading">
           <h1>Confirm Purchase</h1>
