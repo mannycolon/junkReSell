@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 07, 2016 at 09:05 AM
+-- Generation Time: Dec 11, 2016 at 01:04 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.5.38
 
@@ -19,9 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `junkReSell_db`
 --
-DROP DATABASE IF EXISTS junkReSell_db;
-CREATE DATABASE junkReSell_db;
-USE junkReSell_db;
 
 -- --------------------------------------------------------
 
@@ -45,9 +42,9 @@ CREATE TABLE `addresses` (
 --
 
 INSERT INTO `addresses` (`addressID`, `userID`, `address`, `city`, `state`, `zipCode`, `phone`, `disabled`) VALUES
-(30, 41, '13 Hopper St', 'Prospect Park', 'NJ', '07508', '9738885523', 0),
+(30, 42, '13 Hopper St', 'Prospect Park', 'NJ', '07508', '9738885523', 0),
 (31, 41, '107 Church Street', 'Haledon', 'NJ', '07508', '9736894985', 0),
-(32, 42, '107 Church Street', 'Haledon', 'NJ', '07508', '9736894985', 0);
+(32, 42, '300 Jesus Street', 'Haledon', 'NJ', '07508', '9736894985', 0);
 
 -- --------------------------------------------------------
 
@@ -89,7 +86,8 @@ INSERT INTO `category` (`categoryID`, `categoryName`) VALUES
 (2, 'Sporting Goods'),
 (3, 'Home and Garden'),
 (4, 'Clothing'),
-(5, 'Other');
+(5, 'Toys'),
+(6, 'Other');
 
 -- --------------------------------------------------------
 
@@ -104,6 +102,16 @@ CREATE TABLE `orderItems` (
   `quantity` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `orderItems`
+--
+
+INSERT INTO `orderItems` (`id`, `orderID`, `productID`, `quantity`) VALUES
+(43, 41, 17, 1),
+(44, 42, 6, 1),
+(46, 44, 6, 1),
+(47, 44, 7, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -115,9 +123,24 @@ CREATE TABLE `orders` (
   `userID` int(11) NOT NULL,
   `total_price` float(10,2) NOT NULL,
   `created` datetime NOT NULL,
+  `cardFullName` varchar(65) COLLATE utf8_unicode_ci NOT NULL,
+  `cardNumber` char(16) COLLATE utf8_unicode_ci NOT NULL,
+  `cardExpires` char(7) COLLATE utf8_unicode_ci NOT NULL,
+  `cvv` int(11) NOT NULL,
+  `billingAddressID` int(11) NOT NULL,
+  `shipAddressID` int(11) NOT NULL,
   `modified` datetime NOT NULL,
   `status` enum('1','0') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `userID`, `total_price`, `created`, `cardFullName`, `cardNumber`, `cardExpires`, `cvv`, `billingAddressID`, `shipAddressID`, `modified`, `status`) VALUES
+(41, 42, 57.00, '2016-12-10 09:38:01', 'MANUEL A COLON', '34249881863029', '02/2017', 1234, 30, 32, '2016-12-10 09:38:01', '1'),
+(42, 42, 32.00, '2016-12-11 08:44:41', 'MANUEL A COLON', '12344567', '01/2016', 1234, 30, 32, '2016-12-11 08:44:41', '1'),
+(44, 42, 531.00, '2016-12-11 09:21:00', 'MANUEL A COLON', '123465438765', '02/2017', 1234, 30, 32, '2016-12-11 09:21:00', '1');
 
 -- --------------------------------------------------------
 
@@ -141,7 +164,7 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`productID`, `categoryID`, `productName`, `abbrvName`, `productPrice`, `productQuantity`, `description`, `dateAdded`) VALUES
-(1, 1, 'Samsung 720p LED TV (2014 Model)', 'samsungTV', '650.00', 10, 'Ideal for placement in a bedroom or dorm room, this\n 720p Samsung HDTV delivers a wide variety of colors and clarity, allowing you to relax and enjoy your\n favorite movies and shows. Connect your USB device directly for access to your photos, videos and music.', '2016-09-23'),
+(1, 1, 'Samsung 720p LED TV (2014 Model)', 'samsungTV', '650.00', 10, 'Ideal for placement in a bedroom or dorm room, this\r\n 720p Samsung HDTV delivers a wide variety of colors and clarity, allowing you to relax and enjoy your\r\n favorite movies and shows. Connect your USB device directly for access to your photos, videos and music.', '2016-09-23'),
 (2, 1, 'Apple iPad Air 16GB WiFi', 'iPad', '379.00', 15, 'For tech connoisseurs, the lighter and thinner the design, the more desirable\n  that piece of hardware is. Designed for true techies, the Apple iPad Air is 20 percent thinner than the standard iPad,\n  and weighs just one pound, so it feels unbelievably light in your hand. It comes with a 9.7" Retina display, the A7\n  chip with 64-bit architecture, ultrafast wireless, powerful apps, and up to 10 hours of battery life. And over 475,000\n  apps in the App Store are just a tap away on the Apple iPad Air. ', '2016-10-06'),
 (3, 1, 'Apple MacBook Pro 13.3" With Touch Bar', 'macbook-pro-2016', '1799.00', 9, 'It is faster and more powerful than before,\n  yet remarkably thinner and lighter. It has the brightest, most colorful Mac notebook display ever. And it introduces\n  the Touch Bar: a Multi-Touch enabled strip of glass built into the keyboard for instant access to the tools you want,\n  right when you want them. The new MacBook Pro is built on groundbreaking ideas. And it is ready for yours.', '2016-11-26'),
 (4, 1, 'Amazon Echo Dot', 'echodot', '50.00', 5, 'Deliver your favorite playlist anywhere in your home with the Amazon Echo\n  Dot voice-controlled device. Control most electric devices through voice activation, or schedule a ride with Uber and\n  order a pizza. The Amazon Echo Dot voice-controlled device turns any home into a smart home with the Alexa app on a\n  smartphone or tablet.', '2016-11-26'),
@@ -157,10 +180,15 @@ INSERT INTO `product` (`productID`, `categoryID`, `productName`, `abbrvName`, `p
 (14, 4, 'Gildan G185 Heavy Blend Adult Hooded Sweatshirt', 'gildanhoodie', '14.00', 6, 'Snug and comfortable sweatshirt which is\n  made of 50% cotton 50% polyester, has double-needle stitching throughout, and a pouch pocket.', '2016-11-26'),
 (15, 4, 'Harry Potter Girls Hogwarts Long Sleeve T-Shirt with Scarf', 'hpshirt', '19.00', 17, 'The perfect shirt for the Hufflepuff girl in\n  your family. Made from 60% cotton and 40% polyester.', '2016-11-26'),
 (16, 4, 'Under Armour Boys Sportstyle Fleece Bomber Jacket', 'fleece', '59.00', 30, 'Maximize your young sons performance and\n  outdoor adventures with the Under Armour Boys Sportstyle Fleece Bomber Jacket. An ultra-soft fleece construction with a\n  brushed interior delivers locked-in warmth for a comfortable fit and feel. Moisture-wicking properties draw sweat away\n  to keep him dry, while stretch fabric allows him to move without restriction. Give him on-trend, sporty style with the\n  UA Sportstyle Fleece Bomber Jacket.', '2016-11-26'),
-(17, 5, 'Hot Wheels Criss Cross Crash Track Set', 'hotwheels', '57.00', 45, 'With more than 16 feet of track that includes\n  hairpin turns, motorized boosters and a giant crash zone, kids can enjoy crash-and-bash fun for hours on end. Watching\n  cars maneuver loops and the Criss Cross intersections is riveting.', '2016-11-26'),
-(18, 5, 'Pearl EXX725/C 5-Piece Export Standard Drum Set with Hardware (Red Wine)', 'pearldrums', '649.00', 4, 'The drums blended\n  Poplar/Asian Mahogany shell delivers strong volume and sustained low-end. The three-way tom mount allows the shell to resonate\n  freely with wobble-free performance. Upgraded for the serious student, featuring double-braced stands and chain-drive\n  bass drum pedal.', '2016-11-26'),
-(19, 5, 'Motorcycle Street Bike Helmet', 'helmet', '39.00', 29, 'This motorcycle helmet comes with 2 visors: clear + smoked and 1\n  neck scarf for winter use. The streamline design reduces wind noise. It also has an advanced lightweight durable ABS shell\n  with a quick release strap for easy use.', '2016-11-26'),
-(20, 5, 'Zootopia (Blue-Ray)', 'zootopia', '25.00', 9, 'From Walt Disney Animation Studios comes a comedy-adventure set in\n  the modern mammal metropolis of Zootopia. Determined to prove herself, Officer Judy Hopps, the first bunny on Zootopias\n  police force, jumps at the chance to crack her first case even if it means partnering with scam-artist fox Nick Wilde to\n  solve the mystery. Bring home this hilarious adventure full of action, heart and tons of bonus extras that take you deeper\n  into the world of Zootopia. It s big fun for all shapes and species!', '2016-11-26');
+(17, 6, 'Hot Wheels Criss Cross Crash Track Set', 'hotwheels', '57.00', 45, 'With more than 16 feet of track that includes\n  hairpin turns, motorized boosters and a giant crash zone, kids can enjoy crash-and-bash fun for hours on end. Watching\n  cars maneuver loops and the Criss Cross intersections is riveting.', '2016-11-26'),
+(18, 6, 'Pearl EXX725/C 5-Piece Export Standard Drum Set with Hardware (Red Wine)', 'pearldrums', '649.00', 4, 'The drums blended\n  Poplar/Asian Mahogany shell delivers strong volume and sustained low-end. The three-way tom mount allows the shell to resonate\n  freely with wobble-free performance. Upgraded for the serious student, featuring double-braced stands and chain-drive\n  bass drum pedal.', '2016-11-26'),
+(19, 6, 'Motorcycle Street Bike Helmet', 'helmet', '39.00', 29, 'This motorcycle helmet comes with 2 visors: clear + smoked and 1\n  neck scarf for winter use. The streamline design reduces wind noise. It also has an advanced lightweight durable ABS shell\n  with a quick release strap for easy use.', '2016-11-26'),
+(20, 6, 'Zootopia (Blue-Ray)', 'zootopia', '25.00', 9, 'From Walt Disney Animation Studios comes a comedy-adventure set in\n  the modern mammal metropolis of Zootopia. Determined to prove herself, Officer Judy Hopps, the first bunny on Zootopias\n  police force, jumps at the chance to crack her first case even if it means partnering with scam-artist fox Nick Wilde to\n  solve the mystery. Bring home this hilarious adventure full of action, heart and tons of bonus extras that take you deeper\n  into the world of Zootopia. It s big fun for all shapes and species!', '2016-11-26'),
+(22, 5, 'Toy Story Buzz Lightyear', 'Toy-Story-Buzz', '59.99', 3, 'Buzz Lightyear is a fictional character in the Toy Story franchise. He is a toy space ranger hero according to the movies and action figure in the Toy Story franchise. ', '2016-12-10'),
+(23, 1, 'Canon EOS Rebel T5i 18.0 MP Digital SLR Camera', 'canont5i', '599.00', 2, 'Canon''s flagship Rebel, the EOS Rebel T5i camera, is a sophisticated full-featured powerhouse that delivers fast performance - all packed in an ergonomic, stylish body that''s ready for anything. With a brilliant Vari-angle touch Screen 3.0" ClearView LCD monitor II and a phenomenal state-of-the-art AF system, it''s the perfect camera to unleash your creativity every time you pick it up.', '2016-12-11'),
+(24, 1, 'QacQoc Bluetooth Speakers', 'QacQoc Bluetooth Speakers', '45.00', 5, 'QacQoc Q-SK01 Portable Bluetooth Speaker is a portable audio player for indoor relaxation and kicking outdoor parties. \r\n-- Blast your favorite tunes with dynamic sound thanks to 2x 3W HD loudspeakers and 2 high-performance acoustic drivers that deliver crystal clear audio with stunning detail. \r\nVersatile, portable, and wireless, use it everywhere and take the party with you. ', '2016-12-11'),
+(25, 2, '2016 Wilson A2000', 'baseball Glove', '247.99', 20, 'Since its introduction in 1957, the Wilson A2000 has set the standard for premium ball gloves. With over 55 years of game changing performance, the A2000 only continues to get better and is still one of the most popular glove choices among baseball''s top athletes. The A2000 is made from American Pro Stock Steerhide Leather that is hand selected for its rugged durability. Inside the glove, you''ve got an extremely comfortably Dri-Lex Wrist Lining. Dri-Lex Technology is an ultra-breathable material that transfers moisture away from the skin, keeping your hand cool and dry. ', '2016-12-11'),
+(27, 2, 'Louisville Slugger MBHMI13-NB Hard Maple I13 Natural/Black Baseball Bat', 'baseball bat', '49.99', 5, 'Baseball''s biggest hitters choose maple for its harder hitting surface and greater durability. The Hard Maple series is pulled from their original production line for some minor flaw that will not affect the bat''s performance. These small production errors mean deep savings on superior bats ideal for practice, batting cages or even games.', '2016-12-11');
 
 -- --------------------------------------------------------
 
@@ -184,7 +212,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`userID`, `email`, `password`, `firstname`, `lastname`, `shipAddressID`, `billingAddressID`) VALUES
 (41, 'maniel_1516@hotmail.com', 'test123', 'maniel', 'colon', 30, 31),
-(42, 'colonmanuel7@gmail.com', 'test123', 'MANUEL', 'COLON', 32, 32);
+(42, 'colonmanuel7@gmail.com', 'test123', 'MANUEL', 'COLON', 32, 30);
 
 --
 -- Indexes for dumped tables
@@ -243,37 +271,37 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `addresses`
 --
 ALTER TABLE `addresses`
-  MODIFY `addressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `addressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT for table `administrators`
 --
 ALTER TABLE `administrators`
-  MODIFY `adminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `adminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `categoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `categoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `orderItems`
 --
 ALTER TABLE `orderItems`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 --
 -- Constraints for dumped tables
 --
@@ -293,3 +321,9 @@ ALTER TABLE `orders`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+-- Create a user named mgs_user
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON junkReSell_db.*
+TO junkReSell@localhost
+IDENTIFIED BY 'junkReSellpass';

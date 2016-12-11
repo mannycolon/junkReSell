@@ -7,10 +7,8 @@
       if ($category_id == NULL || $category_id == FALSE){
         $category_id = rand(1, 5);
       }
-    
     //get id of category from categories.php
     $cID = $_GET['id'];
-
     //get tables for selected category
     $queryCategory = "SELECT *
                      FROM category
@@ -32,7 +30,7 @@
     $products = $statement3->fetchAll();
     $statement3->closeCursor();
     ?>
-    
+
     <section style="padding-left: 60px; padding-right: 60px">
         <h2><?php echo $category_name; ?></h2>
         <div class="row">
@@ -59,6 +57,6 @@
             <?php endforeach; ?>
             </div>
     </section>
-</main>
-</body>
+  </main>
+  </body>
 </html>

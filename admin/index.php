@@ -1,8 +1,9 @@
 <?php require_once('../util/main.php'); ?>
 <?php require_once('../util/userSession.php'); ?>
 <?php
-    //checks if user is logged in
-  if($_SESSION['user']){
+    //checks if admin is logged in
+  if(isset($_SESSION['admin'])){
+    $admin = $_SESSION['admin'];
   }else{
     //redirect if user is not logged in
     header("location: $app_path");
@@ -11,7 +12,7 @@
 <?php include '../view/header.php'; ?>
     <main class="nofloat">
       <h2 align="center">Admin Account</h2>
-      <h3 align="center" style="color:navy;"> Hello, <?php print "$user"?>!</h3><br>
+      <h3 align="center" style="color:navy;"> Hello, <?php print "$admin"?>!</h3><br>
 
       <h4 align="center">Choose an option below:</h4>
       <p align="center"><a href="addproduct.php" class="btn btn-info" role="button">Add Product</a>&nbsp

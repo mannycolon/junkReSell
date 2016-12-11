@@ -4,13 +4,13 @@
   $cart = new Cart;
 
   // include database configuration file
-  include 'dbConfig.php';
+  include '../util/dbConfig.php';
   if(isset($_REQUEST['action']) && !empty($_REQUEST['action'])){
     if($_REQUEST['action'] == 'addToCart' && !empty($_REQUEST['id'])){
       $productID = $_REQUEST['id'];
       //get product details
       $query = $db->query("SELECT * FROM product WHERE productID = " . $productID);
-      $row = $query->fetch_assoc();
+      $row = $query->fetch(PDO::FETCH_ASSOC);
       $itemData = array(
         'id' => $row['productID'],
         'name' => $row['productName'],
@@ -39,7 +39,7 @@
         '".date("Y-m-d H:i:s")."', '".$_SESSION['billingAddressID']."',
         '".$_SESSION['shipAddressID']."', '".date("Y-m-d H:i:s")."')");
       if($insertOrder){
-        $orderID = $db->insert_id;
+        $orderID = $db->lastInsertId();;
         $_SESSION["orderID"] = $orderID;
         $sql = '';
         //get cart Items
@@ -49,7 +49,7 @@
                    VALUES ('".$orderID."', '".$item['id']."', '".$item['qty']."');";
         }
         // insert order items into database
-        $insertOrderItems = $db->multi_query($sql);
+        $insertOrderItems = $db->prepare($sql);
         if($insertOrderItems){
           $cart->destroy();
           header("Location: paymentInfo.php?id=$orderID");
