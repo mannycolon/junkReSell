@@ -2,22 +2,18 @@
   session_start();
   $email = mysql_real_escape_string($_POST['email']);
   $password = mysql_real_escape_string($_POST['password']);
+  // include database configuration file
+  include '../util/dbConfig.php';
 
-  //connecting to server
-  mysql_connect("localhost", "root", "") or die(mysql_error());
-  //connect to database
-  mysql_select_db("junkReSell_db") or die("cannot connect to database");
-  //Query the users table if there are matching rows equal to $email
-  $query = mysql_query("SELECT * FROM users WHERE email='$email'");
-  //Checks if email exists
-  $exists = mysql_num_rows($query);
+  $stmt = $db->query("SELECT * FROM users WHERE email='$email'");
+  $row_count = $stmt->rowCount();
   $table_users = "";
   $table_password = "";
   $table_firstname = "";
   //if there are not returning rows or no existing email
-  if($exists > 0){
+  if($row_count > 0){
     //display all rows from query
-    while($row = mysql_fetch_assoc($query)){
+    while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
       /*the first email row is passed on to $table_users,
       and so on until the query is finished*/
       $table_users = $row['email'];

@@ -80,14 +80,14 @@
     $billZipcode = mysql_real_escape_string($_POST['billingzipcode']);
     $billPhone = mysql_real_escape_string($_POST['billingphone']);
     $bool = true;
-    //connecting to the Server
-    mysql_connect("localhost", "root", "") or die(mysql_error());
-    //connecting to database
-    mysql_select_db("junkReSell_db") or die("cannot connect to login database");
+
+    // include database configuration file
+    include '../util/dbConfig.php';
+
     //Query the users table
-    $query = mysql_query("select * from users");
+    $stmt = $db->query("SELECT * FROM users");
     //displaying all row from query
-    while($row = mysql_fetch_array($query)){
+    while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
       /*the first email row is passed on to $table_users,
       and so on until the query is finished */
       $table_users = $row['email'];
@@ -102,30 +102,30 @@
     }
     if($bool){
       //inserts the values to table users
-      mysql_query("INSERT INTO users (email, password, firstname, lastname) VALUES ('$email', '$password', '$firstname', '$lastname')");
-      $query = mysql_query("select * from users");
+      $db->exec("INSERT INTO users (email, password, firstname, lastname) VALUES ('$email', '$password', '$firstname', '$lastname')");
+      $stmt = $db->query("SELECT * FROM users");
       //displaying all row from query
-      while($row = mysql_fetch_array($query)){
+      while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $userID = $row['userID'];
       }
-      mysql_query("INSERT INTO addresses (userID, address, city, state, zipCode, phone) VALUES ('$userID', '$address', '$city', '$state', '$zipcode', '$phone')");
-      $query = mysql_query("select * from addresses WHERE userID='$userID'");
+      $db->exec("INSERT INTO addresses (userID, address, city, state, zipCode, phone) VALUES ('$userID', '$address', '$city', '$state', '$zipcode', '$phone')");
+      $stmt = $db->query("SELECT * FROM addresses WHERE userID='$userID'");
       //displaying all row from query
-      while($row = mysql_fetch_array($query)){
+      while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
         $shipAddressID = $row['addressID'];
       }
       //use shipping address as billing address
       if($_POST['useShipping']){
         $billingAddressID = $shipAddressID;
       }else{
-        mysql_query("INSERT INTO addresses (userID, address, city, state, zipCode, phone) VALUES ('$userID', '$billAddress', '$billCity', '$billState', '$billZipcode', '$billPhone')");
-        $query = mysql_query("select * from addresses WHERE userID='$userID'");
-        while($row = mysql_fetch_array($query)){
+        $db->exec("INSERT INTO addresses (userID, address, city, state, zipCode, phone) VALUES ('$userID', '$billAddress', '$billCity', '$billState', '$billZipcode', '$billPhone')");
+        $stmt = $db->query("SELECT * FROM addresses WHERE userID='$userID'");
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
           $billingAddressID = $row['addressID'];
         }
       }
-      mysql_query("UPDATE users SET shipAddressID = '$shipAddressID' WHERE userID='$userID'");
-      mysql_query("UPDATE users SET billingAddressID = '$billingAddressID' WHERE userID='$userID'");
+      $db->exec("UPDATE users SET shipAddressID = '$shipAddressID' WHERE userID='$userID'");
+      $db->exec("UPDATE users SET billingAddressID = '$billingAddressID' WHERE userID='$userID'");
       //prompt to let user know registration was succesful
       print '<script>alert("Successully registered!");</script>';
       //redirects to register.php
@@ -135,27 +135,25 @@
     session_start();
     $email = mysql_real_escape_string($_POST['email']);
     $password = mysql_real_escape_string($_POST['password']);
-    //connecting to server
-    mysql_connect("localhost", "root", "") or die(mysql_error());
-    //connect to database
-    mysql_select_db("junkReSell_db") or die("cannot connect to database");
-    //Query the users table if there are matching rows equal to $email
-    $query = mysql_query("SELECT * FROM users WHERE email='$email'");
-    //Checks if email exists
-    $exists = mysql_num_rows($query);
+    // include database configuration file
+    include '../util/dbConfig.php';
+
+    $stmt = $db->query("SELECT * FROM users WHERE email='$email'");
+    $row_count = $stmt->rowCount();
     $table_users = "";
     $table_password = "";
+    $table_firstname = "";
     //if there are not returning rows or no existing email
-    if($exists > 0){
+    if($row_count > 0){
       //display all rows from query
-      while($row = mysql_fetch_assoc($query)){
+      while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         /*the first email row is passed on to $table_users,
         and so on until the query is finished*/
         $table_users = $row['email'];
-        $table_firstname = $row['firstname'];
         /*the first password row is passed on to $table_password,
         and so on until the query is finished*/
         $table_password = $row['password'];
+        $table_firstname = $row['firstname'];
       }
       //check if there are any matching fields
       if(($email == $table_users) && ($password == $table_password)){

@@ -12,16 +12,13 @@
       $categories = $statement2->fetchAll();
       $statement2->closeCursor();
     ?>
-    <section style="padding-left: 60px; padding-right: 60px">
-
-      <!--create container for website name and description-->
-      <div class="container">
-        <div class="jumbotron">
-          <h1 align="center">junkReSell</h1>      
-          <h3 align="center">Sell your products on our site</h3>
-        </div>    
-      </div>
-      <!--create panel for each category-->  
+    <section style="padding-top: 15px;padding-left: 60px; padding-right: 60px; background-color: #000000; color: #fff">
+      <!-- website name and description-->
+      <center>
+        <img src="./assets/logo.png" alt="junkReSell Logo" width="380px">
+      </center>
+      <h3 align="center" style="color: #D3D3D3; margin-bottom: 40px;">Sell your products on our site</h3>
+      <!--create panel for each category-->
       <div class="row">
       <?php foreach ($categories as $category) : ?>
           <div class="col-sm-4">
