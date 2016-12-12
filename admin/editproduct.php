@@ -24,20 +24,15 @@
 <?php include '../view/header.php'; ?>
 
     <main>
-      <h1 style="padding-left: 740px; padding-right: 740px">Edit Product </h1><br>
-	<form action="../account/fileupload.php" method="post" enctype="multipart/form-data" 
-            	style="padding-left: 600px; padding-right: 600px">
-          <h4>Select image to upload before clicking "Submit":</h4>
-          <input type="file" name="fileToUpload" id="fileToUpload"><br>
-          <input type="submit" value="Upload Image" name="submit" style="color:black;">
-        </form>
       <form method="POST" action="editproductconfirm.php?id=<?php echo $products[0]['abbrvName']; ?>"
-            style="padding-left: 600px; padding-right: 600px">
+            enctype="multipart/form-data"
+            style="padding-left: 200px; padding-right: 200px">
       <!--Drop-down takes on value of category chosen by admin-->
       <h3>Category:</h3>
       <select name="category_id" class="btn btn-primary dropdown-toggle"
               type="button" data-toggle="dropdown"
               style="background-color: #004080; font-size: 20px; border-color:#004080;">
+      <option disabled selected value></option>
      <?php foreach ($categories as $category) :
               if ($category['categoryID'] == $product['categoryID']){
                 $selected = 'selected';
@@ -63,19 +58,23 @@
       </div>
       <div class="form-group">
         <h3>Quantity:</h3>
-	<input type="text" name="quantity" class="form-control" value="<?php echo $products[0]['productQuantity']; ?>" required><br><br>
+        <input type="text" name="quantity" class="form-control"
+               value="<?php echo $products[0]['productQuantity']; ?>" required><br><br>
       </div>
       <div class="form-group">
-	<h3>Description:</h3>
-	<textarea rows="10" cols="50" name="description" class="form-control" required><?php echo $products[0]['description']; ?></textarea>
+	       <h3>Description:</h3>
+	       <textarea rows="10" cols="50" name="description"
+                   class="form-control" required>
+                   <?php echo $products[0]['description']; ?>
+         </textarea>
       </div>
-      <!--Admin is required to confirm the file again so the name can be passed to the editproductconfirm.php form-->
-        <h3>Confirm File:</h3>
-        <input type="file" name="fileToUpload" id="fileToUpload" value="Confirm Picture" required><br>
-      <input id="button" type="submit" name="submit" value="Submit" class="btn btn-primary dropdown-toggle"
-	data-toggle="dropdown" style="background-color: #29a329; font-size: 20px; border-color:#29a329;">
-      </form><br>
-      <br><p align="center"><a href="index.php">Return to Admin Main Page</a></p>
-      </main>
+      <h4>Select image to upload before clicking "Submit":</h4>
+      <input type="file" name="fileToUpload" id="fileToUpload"><br>
+      <input id="button" type="submit" name="submit" value="Submit"
+             class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+             style="background-color: #29a329; font-size: 20px; border-color:#29a329;">
+      </form><br><br>
+      <p align="center"><a href="index.php">Return to Admin Main Page</a></p>
+    </main>
   </body>
 </html>

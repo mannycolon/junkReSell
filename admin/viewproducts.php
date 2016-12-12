@@ -24,6 +24,7 @@
 		table{width:75%;}
 	</style>
 	<h2 align="center">List of Products</h2><br>
+  <p align="center"><a href="index.php">Return to Admin Main Page</a></p>
 	<table align="center">
 	<tbody>
 		<tr>
