@@ -23,7 +23,7 @@
     <main>
 	    	<form action="addProductConfirm.php" method="POST" enctype="multipart/form-data"
                 	style="padding-left: 200px; padding-right: 200px">
-           <h1>Add Product</h1><br>
+           <h1>Add Product</h1>
 	         <h3>Category:</h3>
 	          <select name="category_id" class="btn btn-primary dropdown-toggle"
                     type="button" data-toggle="dropdown"
