@@ -28,6 +28,7 @@
 	          <select name="category_id" class="btn btn-primary dropdown-toggle"
                     type="button" data-toggle="dropdown"
                     style="background-color: #004080; font-size: 20px; border-color:#004080;">
+            <option disabled selected value></option>
             <?php foreach ($categories as $category) :
                     if ($category['categoryID'] == $product['categoryID']){
                       $selected = 'selected';
@@ -43,22 +44,22 @@
        	    </select><br>
 	<div class="form-group">
 		<h3>Name:</h3>
-		<input type="text" name="name" class="form-control" required><br>
+		<input type="text" name="name" class="form-control" required>
 	</div>
 	<div class="form-group">
 		<h3>Price:</h3>
-		<input type="text" name="price" class="form-control" placeholder="0.00" pattern="^\d*(\.\d{2}$)?" required><br>
+		<input type="text" name="price" class="form-control" placeholder="0.00" pattern="^\d*(\.\d{2}$)?" required>
 	</div>
 	<div class="form-group">
 		<h3>Quantity:</h3>
-		<input type="text" name="quantity" class="form-control" required><br><br>
+		<input type="text" name="quantity" class="form-control" required><br>
 	</div>
 	<div class="form-group">
 		<h3>Description:</h3>
 		<textarea rows="10" cols="50" name="description" class="form-control" required></textarea>
 	</div>
   <h4>Select image to upload before clicking "Submit":</h4>
-  <input type="file" name="fileToUpload" id="fileToUpload" required><br>
+  <input type="file" name="fileToUpload" id="fileToUpload" required>
   <input id="button" type="submit" name="submit" value="Submit" class="btn btn-primary dropdown-toggle"
          data-toggle="dropdown" style="background-color: #29a329; font-size: 20px; border-color:#29a329;">
 	</form>
