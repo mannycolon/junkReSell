@@ -143,6 +143,7 @@
     $table_users = "";
     $table_password = "";
     $table_firstname = "";
+    $table_userID = "";
     //if there are not returning rows or no existing email
     if($row_count > 0){
       //display all rows from query
@@ -154,6 +155,7 @@
         and so on until the query is finished*/
         $table_password = $row['password'];
         $table_firstname = $row['firstname'];
+        $table_userID = $row['userID'];
       }
       //check if there are any matching fields
       if(($email == $table_users) && ($password == $table_password)){
@@ -161,6 +163,7 @@
           //set the email as username in a session, this will serve as a global variable
           $_SESSION['user'] = $email;
           $_SESSION['firstname'] = $table_firstname;
+          $_SESSION['userID'] = $table_userID;
           //redirects the user to the authenticated home page
           header("location: index.php");
         }
