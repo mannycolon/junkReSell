@@ -1,6 +1,6 @@
 <?php
-	//connect to database
-	include '../util/dbConfig.php';
+  //connect to database
+  include '../util/dbConfig.php';
   global $db;
   //get 'id' of product when admin clicks on product in viewproducts.php
   $productID = $_GET['id'];
@@ -25,6 +25,12 @@
 
     <main>
       <h1 style="padding-left: 740px; padding-right: 740px">Edit Product </h1><br>
+	<form action="../account/fileupload.php" method="post" enctype="multipart/form-data" 
+            	style="padding-left: 600px; padding-right: 600px">
+          <h4>Select image to upload before clicking "Submit":</h4>
+          <input type="file" name="fileToUpload" id="fileToUpload"><br>
+          <input type="submit" value="Upload Image" name="submit" style="color:black;">
+        </form>
       <form method="POST" action="editproductconfirm.php?id=<?php echo $products[0]['abbrvName']; ?>"
             style="padding-left: 600px; padding-right: 600px">
       <!--Drop-down takes on value of category chosen by admin-->
@@ -55,32 +61,21 @@
         <input type="text" name="price" class="form-control" placeholder="0.00" pattern="^\d*(\.\d{2}$)?"
                value="<?php echo $products[0]['productPrice']; ?>" required><br>
       </div>
-			<div class="form-group">
-				<h3>Quantity:</h3>
-				<input type="text" name="quantity" class="form-control" value="<?php echo $products[0]['productQuantity']; ?>" required><br><br>
-			</div>
-			<div class="form-group">
-				<h3>Image filename:</h3>
-				<input type="text" name="image" class="form-control" value="<?php echo $products[0]['abbrvName']; ?>" required><br><br>
-			</div>
-			<div class="form-group">
-				<h3>Description:</h3>
-				<textarea rows="10" cols="50" name="description" class="form-control" required><?php echo $products[0]['description']; ?></textarea>
-			</div>
-			<div class="form-group">
-				<h3>Date Added:</h3>
-				<input type="text" name="date" class="form-control" value="<?php echo $products[0]['dateAdded']; ?>" required><br><br>
-			</div>
-			<input id="button" type="submit" name="submit" value="Submit" class="btn btn-primary dropdown-toggle"
-			data-toggle="dropdown" style="background-color: #29a329; font-size: 20px; border-color:#29a329;">
-		</form><br>
-		<!--Allows admin to upload an image into the images folder-->
-		<form action="../account/fileupload.php" method="post" enctype="multipart/form-data" style="padding-left: 600px; padding-right: 600px">
-			<h4>Select image to upload before clicking "Submit":</h4>
-			<input type="file" name="fileToUpload" id="fileToUpload"><br>
-			<input type="submit" value="Upload Image" name="submit">
-		</form>
-	  <br><p align="center"><a href="index.php">Return to Admin Main Page</a></p>
-		</main>
+      <div class="form-group">
+        <h3>Quantity:</h3>
+	<input type="text" name="quantity" class="form-control" value="<?php echo $products[0]['productQuantity']; ?>" required><br><br>
+      </div>
+      <div class="form-group">
+	<h3>Description:</h3>
+	<textarea rows="10" cols="50" name="description" class="form-control" required><?php echo $products[0]['description']; ?></textarea>
+      </div>
+      <!--Admin is required to confirm the file again so the name can be passed to the editproductconfirm.php form-->
+        <h3>Confirm File:</h3>
+        <input type="file" name="fileToUpload" id="fileToUpload" value="Confirm Picture"><br>
+      <input id="button" type="submit" name="submit" value="Submit" class="btn btn-primary dropdown-toggle"
+	data-toggle="dropdown" style="background-color: #29a329; font-size: 20px; border-color:#29a329;">
+      </form><br>
+      <br><p align="center"><a href="index.php">Return to Admin Main Page</a></p>
+      </main>
   </body>
 </html>
