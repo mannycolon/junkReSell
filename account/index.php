@@ -16,6 +16,7 @@
       <p align="center">
         <a href="addProduct.php" class="btn btn-info" role="button">Add Product</a>&nbsp
         <a href="viewProducts.php" class="btn btn-info" role="button">View Products</a>&nbsp&nbsp
+        <a href="viewOrders.php" class="btn btn-info" role="button">View Orders</a>&nbsp&nbsp
       </p>
     </main>
   </body>

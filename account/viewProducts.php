@@ -25,7 +25,17 @@
 		table{width:75%;}
 	</style>
 	<h2 align="center">List of Products</h2><br>
-  <p align="center"><a href="index.php">Return to User Main Page</a></p>
+  <table style="background-color: #000" align="center">
+    <tbody>
+      <tr>
+        <td style="border-style: none; padding-left: 0px; padding-right: 0px;">
+          <a href="index.php" class="btn btn-success btn-block" style="width: 50%">
+            <i class="glyphicon glyphicon-menu-left"></i>Return to User Main Page
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 	<table align="center">
 	<tbody>
 		<tr>
@@ -62,7 +72,17 @@
 			</tr>
 		<?php endforeach; ?></p>
 	</tbody>
-	</table>
-	<br><p align="center"><a href="index.php">Return to User Main Page</a></p>
+  </table><br>
+  <table style="background-color: #000" align="center">
+    <tbody>
+      <tr>
+        <td style="border-style: none; padding-left: 0px; padding-right: 0px;">
+          <a href="index.php" class="btn btn-success btn-block" style="width: 50%">
+            <i class="glyphicon glyphicon-menu-left"></i>Return to User Main Page
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>
