@@ -4,9 +4,8 @@
   global $db;
   //receives user input from form in createadmin.php
   if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $full_name = mysql_real_escape_string($_POST['fullname']);
-    $email_address = mysql_real_escape_string($_POST['email']);
-    $password = mysql_real_escape_string($_POST['pass']);
+    //get only the email first to compare with table
+    $email_address = $_POST['email'];
     $bool = true;
     $stmt = $db->query("SELECT * FROM administrators");
     //displaying all rows from query
@@ -25,9 +24,20 @@
     }
     //if there are no conflicts of email
     if($bool){
-      //insert the values to table admins
-      $db->exec("INSERT INTO administrators (fullName, email, password)
-        VALUES ('$full_name', '$email_address', '$password')");
+      // set the PDO error mode to exception
+      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      // prepare sql and bind parameters
+      $stmt = $db->prepare("INSERT INTO administrators (fullName, email, password) 
+        VALUES (:fullname, :email, :password)");
+      $stmt->bindParam(':fullname', $full_name);
+      $stmt->bindParam(':email', $email_address);
+      $stmt->bindParam(':password', $password);
+      //get user input 
+      $full_name = $_POST['fullname'];
+      $email_address = $_POST['email'];
+      $password = $_POST['pass'];
+      //executes query
+      $stmt->execute();
       //prompt to let user know creation was succesful
       print '<script>alert("Successully created account!");</script>';
     }
