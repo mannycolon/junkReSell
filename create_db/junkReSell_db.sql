@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 12, 2016 at 10:01 AM
+-- Generation Time: Dec 12, 2016 at 10:39 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.5.38
 
@@ -140,8 +140,7 @@ CREATE TABLE `orders` (
 INSERT INTO `orders` (`id`, `userID`, `total_price`, `created`, `cardFullName`, `cardNumber`, `cardExpires`, `cvv`, `billingAddressID`, `shipAddressID`, `modified`, `status`) VALUES
 (41, 42, 57.00, '2016-12-10 09:38:01', 'MANUEL A COLON', '34249881863029', '02/2017', 1234, 30, 32, '2016-12-10 09:38:01', '1'),
 (42, 42, 32.00, '2016-12-11 08:44:41', 'MANUEL A COLON', '12344567', '01/2016', 1234, 30, 32, '2016-12-11 08:44:41', '1'),
-(44, 42, 531.00, '2016-12-11 09:21:00', 'MANUEL A COLON', '123465438765', '02/2017', 1234, 30, 32, '2016-12-11 09:21:00', '1'),
-(53, 42, 769.00, '2016-12-12 05:49:43', '', '', '', 0, 30, 32, '2016-12-12 05:49:43', '1');
+(44, 42, 531.00, '2016-12-11 09:21:00', 'MANUEL A COLON', '123465438765', '02/2017', 1234, 30, 32, '2016-12-11 09:21:00', '1');
 
 -- --------------------------------------------------------
 
@@ -297,7 +296,7 @@ ALTER TABLE `orderItems`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 --
 -- AUTO_INCREMENT for table `product`
 --
