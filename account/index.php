@@ -12,12 +12,11 @@
     <main class="nofloat">
       <h2 align="center">Account</h2>
       <h3 align="center" style="color:white;"> Hello <?php print "$user"?>!</h3>
-      <!--uploading an image got the product-->
-      <form action="fileupload.php" method="post" enctype="multipart/form-data" style="padding-left: 780px;">
-        Select image to upload:
-        <input type="file" name="fileToUpload" id="fileToUpload">
-        <input type="submit" value="Upload Image" name="submit" style="color:black;">
-      </form>
+      <h4 align="center">Choose an option below:</h4>
+      <p align="center">
+        <a href="addProduct.php" class="btn btn-info" role="button">Add Product</a>&nbsp
+        <a href="viewProducts.php" class="btn btn-info" role="button">View Products</a>&nbsp&nbsp
+      </p>
     </main>
   </body>
 </html>
