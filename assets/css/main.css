@@ -59,6 +59,7 @@ body {
     font-family: Arial,sans-serif;
     color: #b12704!important;
     box-sizing: border-box;
+    font-size: 18px; 
   }
 
   .billing{
