@@ -12,7 +12,7 @@
 <?php include '../view/header.php'; ?>
     <main class="nofloat">
       <h2 align="center">Admin Account</h2>
-      <h3 align="center" style="color:navy;"> Hello, <?php print "$admin"?>!</h3><br>
+      <h3 align="center" style="color:white;"> Hello, <?php print "$admin"?>!</h3><br>
 
       <h4 align="center">Choose an option below:</h4>
       <p align="center"><a href="addproduct.php" class="btn btn-info" role="button">Add Product</a>&nbsp

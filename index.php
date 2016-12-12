@@ -1,6 +1,7 @@
 <?php require_once('util/main.php'); ?>
 <?php require_once('util/userSession.php'); ?>
 <?php include 'view/header.php'; ?>
+<?php include 'util/dbConfig.php'; ?>
   <main class="nofloat">
     <?php include 'category/categoryfunctions.php';
 
