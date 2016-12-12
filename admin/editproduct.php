@@ -31,7 +31,7 @@
       <h3>Category:</h3>
       <select name="category_id" class="btn btn-primary dropdown-toggle"
               type="button" data-toggle="dropdown"
-              style="background-color: #004080; font-size: 20px; border-color:#004080;">
+              style="background-color: #004080; font-size: 20px; border-color:#004080;" required>
       <option disabled selected value></option>
      <?php foreach ($categories as $category) :
               if ($category['categoryID'] == $product['categoryID']){
