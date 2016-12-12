@@ -71,7 +71,7 @@
       </div>
       <!--Admin is required to confirm the file again so the name can be passed to the editproductconfirm.php form-->
         <h3>Confirm File:</h3>
-        <input type="file" name="fileToUpload" id="fileToUpload" value="Confirm Picture"><br>
+        <input type="file" name="fileToUpload" id="fileToUpload" value="Confirm Picture" required><br>
       <input id="button" type="submit" name="submit" value="Submit" class="btn btn-primary dropdown-toggle"
 	data-toggle="dropdown" style="background-color: #29a329; font-size: 20px; border-color:#29a329;">
       </form><br>
