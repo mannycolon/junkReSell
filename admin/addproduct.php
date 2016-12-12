@@ -21,15 +21,9 @@
 <?php include '../view/header.php'; ?>
 
     <main>
-	     <h1 style="padding-left: 740px; padding-right: 740px">Add Product </h1><br>
-	    	<form action="../account/fileupload.php" method="post" enctype="multipart/form-data" 
-                	style="padding-left: 600px; padding-right: 600px">
-            		<h4>Select image to upload before clicking "Submit":</h4>
-            		<input type="file" name="fileToUpload" id="fileToUpload"><br>
-            		<input type="submit" value="Upload Image" name="submit" style="color:black;">
-          	</form>
-	      <form method="POST" action="addproductconfirm.php" style="padding-left: 600px; padding-right: 600px">
-
+	    	<form action="addproductconfirm.php" method="POST" enctype="multipart/form-data"
+                	style="padding-left: 200px; padding-right: 200px">
+           <h1>Add Product</h1><br>
 	         <h3>Category:</h3>
 	          <select name="category_id" class="btn btn-primary dropdown-toggle"
                     type="button" data-toggle="dropdown"
@@ -63,11 +57,10 @@
 		<h3>Description:</h3>
 		<textarea rows="10" cols="50" name="description" class="form-control" required></textarea>
 	</div>
-	<!--Admin is required to confirm the file again so the name can be passed to the addproductconfirm.php form-->
-        <h3>Confirm File:</h3>
-        <input type="file" name="fileToUpload" id="fileToUpload" value="Confirm Picture" required><br>
-	<input id="button" type="submit" name="submit" value="Submit" class="btn btn-primary dropdown-toggle"
-		       data-toggle="dropdown" style="background-color: #29a329; font-size: 20px; border-color:#29a329;">
+  <h4>Select image to upload before clicking "Submit":</h4>
+  <input type="file" name="fileToUpload" id="fileToUpload" required><br>
+  <input id="button" type="submit" name="submit" value="Submit" class="btn btn-primary dropdown-toggle"
+         data-toggle="dropdown" style="background-color: #29a329; font-size: 20px; border-color:#29a329;">
 	</form>
 	</main>
 	<br><p align="center"><a href="index.php">Return to Admin Main Page</a></p>
