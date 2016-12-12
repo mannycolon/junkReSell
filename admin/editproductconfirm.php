@@ -1,24 +1,34 @@
 <?php
   //connect to database
   include '../util/dbConfig.php';
+  date_default_timezone_set("America/New_York");
 
   if($_SERVER["REQUEST_METHOD"] == "POST"){
     //get 'id' of product when admin clicks on product in editproduct.php
     $productID = $_GET['id'];
-    //admin input for new produt details
-    $category_id = mysql_real_escape_string($_POST['category_id']);
-    $product_name = mysql_real_escape_string($_POST['name']);
-    $product_price = mysql_real_escape_string($_POST['price']);
-    $product_quantity = mysql_real_escape_string($_POST['quantity']);
-    $image_name = mysql_real_escape_string($_POST['image']);
-    $product_description = mysql_real_escape_string($_POST['description']);
-    $dateAdded = mysql_real_escape_string($_POST['date']);
-    //select from product table and update details with user input
-    $stmt = $db->query("SELECT * FROM product");
-    $db->exec("UPDATE product SET categoryID=$category_id, productName='$product_name',
-              productPrice='$product_price', productQuantity='$product_quantity',
-              abbrvName='$image_name', description='$product_description',
-              dateAdded='$dateAdded' WHERE abbrvName='$productID'");
+    // set the PDO error mode to exception
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // prepare sql and bind parameters
+    $stmt = $db->prepare("UPDATE product SET categoryID=:category_id, productName=:name, productPrice=:price,
+            productQuantity=:quantity, abbrvName=:fileToUpload, description=:description, 
+            dateAdded=:dateAdded WHERE abbrvName='$productID'");
+    $stmt->bindParam(':category_id', $category_id);
+    $stmt->bindParam(':name', $product_name);
+    $stmt->bindParam(':price', $product_price);
+    $stmt->bindParam(':quantity', $product_quantity);
+    $stmt->bindParam(':fileToUpload', $image_name);
+    $stmt->bindParam(':description', $product_description);
+    $stmt->bindParam(':dateAdded', $dateAdded);
+    //get user input from editproduct.php
+    $category_id = $_POST['category_id'];
+    $product_name = $_POST['name'];
+    $product_price = $_POST['price'];
+    $product_quantity = $_POST['quantity'];
+    $image_name = basename($_POST['fileToUpload'], '.png'); //removes png file extension from image
+    $product_description = $_POST['description'];
+    $dateAdded = date("Y-m-d"); //adds current date
+    //executes query
+    $stmt->execute();
     //prompt to let user know edit was succesful
     print '<script>alert("Successully edited product!");</script>';
   }
